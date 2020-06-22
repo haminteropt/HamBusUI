@@ -1,6 +1,8 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav mode="side" #sidenav opened="false" position="start">
-    left panel
+    <a [routerLink]="['home']" routerLinkActive="active">Home</a>
+    <p></p>
+    <a [routerLink]="['rigEdit']" routerLinkActive="active">Rig Edit</a>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
