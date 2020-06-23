@@ -1,3 +1,4 @@
+import { RigBusEditComponent } from './components/rig-bus-edit/rig-bus-edit.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -10,23 +11,19 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RigBusEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatToolbarModule,
-    MatSidenavModule,
     BrowserAnimationsModule,
-    MatIconModule,
-    MatListModule,
-    MatToolbarModule,
-    MatListModule,
-    MatButtonModule,
-    MatIconModule
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

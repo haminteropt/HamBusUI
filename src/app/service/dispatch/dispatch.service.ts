@@ -1,16 +1,18 @@
+import { InfoPacket } from './../../model/info-packet';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/internal/Subject';
-import { InfoPacket } from 'src/app/model/info-packet';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DispatchService {
-  public busChanges$: Subject<any[]>;
-  public radioStateChange$: Subject<any>;
+  public busChanges$: BehaviorSubject<InfoPacket> = new BehaviorSubject(null);
+  public radioStateChange$: BehaviorSubject<any> = new BehaviorSubject(null);
   constructor() { }
   public loginPacket(infoPacket: InfoPacket): void {
     console.log(infoPacket);
+    this.busChanges$.next(infoPacket);
 
   }
 }

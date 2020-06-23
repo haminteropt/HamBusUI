@@ -1,3 +1,4 @@
+import { DispatchService } from './service/dispatch/dispatch.service';
 import { SignalrService } from './service/signalr/signalr.service';
 import { Component } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'HamBusUI';
-  public constructor(private sigR: SignalrService) {
+  public constructor(private sigR: SignalrService, private dispatch: DispatchService) {
     this.connectSignalR();
   }
   private connectSignalR(): void {

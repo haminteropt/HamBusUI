@@ -18,9 +18,7 @@ export class SignalrService {
   }
 
   public loginResponse = (resp: InfoPacket): void => {
-    console.log(resp);
     this.dispatcher.loginPacket(resp);
-
   }
 
   private login(): void {
