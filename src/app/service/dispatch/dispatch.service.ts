@@ -11,9 +11,7 @@ export class DispatchService {
   public radioStateChange$: BehaviorSubject<any> = new BehaviorSubject(null);
   constructor() { }
   public loginPacket(infoPacket: InfoPacket): void {
-    console.log(infoPacket);
     this.busChanges$.next(infoPacket);
-
   }
 }
 

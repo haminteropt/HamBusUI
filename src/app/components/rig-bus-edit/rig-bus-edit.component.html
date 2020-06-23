@@ -3,16 +3,16 @@
     RigBus card
   </mat-card-title>
   <mat-card-content>
-    <form class="rig-form">
-      
+    <form class="rig-form" [formGroup]="rigForm">
+
       <mat-form-field class="form">
         <mat-label>Rig Name</mat-label>
-        <input matInput placeholder="Flex 3000, Master Rig, etc (must be unique)" value="">
+        <input matInput formControlName="name" placeholder="Flex 3000, Master Rig, etc (must be unique)" value="">
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Speed in Bits Per Second AKA Baud</mat-label>
-        <select matNativeControl required>
+        <select matNativeControl formControlName="baudRate" required>
           <option value="300">300</option>
           <option value="1200">1200</option>
           <option value="2400">2400</option>
@@ -27,7 +27,7 @@
 
       <mat-form-field>
         <mat-label>Parity</mat-label>
-        <select matNativeControl required>
+        <select matNativeControl formControlName="parity" required>
           <option value="none">none</option>
           <option value="even">even</option>
           <option value="odd">odd</option>
@@ -39,16 +39,16 @@
 
       <mat-form-field>
         <mat-label>Data Bits</mat-label>
-        <select matNativeControl required>
+        <select matNativeControl formControlName="dataBits" required>
           <option value="6">6</option>
           <option value="7">7</option>
-          <option value="8" selected>8</option>
+          <option value="8">8</option>
         </select>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Stop Bits</mat-label>
-        <select matNativeControl required>
+        <select matNativeControl formControlName="stopBits" required>
           <option value="1" selected>1</option>
           <option value="1.5">1.5</option>
           <option value="2">2</option>
@@ -58,6 +58,6 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button>New Rig</button>
-    <button mat-button>Save</button>
+    <button mat-button (click)="saveClick()">Save</button>
   </mat-card-actions>
 </mat-card>
