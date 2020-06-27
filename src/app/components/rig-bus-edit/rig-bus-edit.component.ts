@@ -1,3 +1,5 @@
+import { SignalrService } from './../../service/signalr/signalr.service';
+import { BusConfigurationDb } from './../../model/busConfigurationDb';
 import { InfoPacket } from './../../model/info-packet';
 
 
@@ -15,8 +17,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class RigBusEditComponent extends BasePage implements OnInit, OnDestroy {
 
   public infoPacket = {};
+  private conf = new BusConfigurationDb();
   public rigForm: FormGroup;
-  constructor(private dispatch: DispatchService, private fb: FormBuilder) {
+  constructor(private dispatch: DispatchService, private fb: FormBuilder, private sigR: SignalrService) {
     super();
   }
 
@@ -26,24 +29,38 @@ export class RigBusEditComponent extends BasePage implements OnInit, OnDestroy {
   }
 
   public saveClick(): void {
+
+    if (!this.conf.id) {
+      this.conf.name = this.rigForm.get('name').value;
+      this.conf.version = '';
+      this.conf.configuration = JSON.stringify(this.rigForm.value);
+    } else {
+      this.conf.name = this.rigForm.get('name').value;
+      this.conf.configuration = JSON.stringify(this.rigForm.value);
+    }
+    this.sigR.saveConfig('', this.conf);
     console.log(this.rigForm.value);
+  }
+
+  public newClick(): void {
+    this.rigForm.get('name').patchValue('');
+    this.conf.id = null;
   }
   private subscribe(): void {
     // this.dispatch.busChanges$.pipe(takeUntil(this.destroy$)).
     this.dispatch.busChanges$.
       subscribe((val: InfoPacket) => {
-        console.log(val);
         this.infoPacket = val;
       });
   }
   private buildFormGroup(): void {
     this.rigForm = this.fb.group({
-      name: ["foobar"],
+      name: ['foo'],
       portName: [],
       baudRate: [19200],
-      parity: ["even"],
-      dataBits: [7],
-      stopBits: [1.5]
+      parity: ['none'],
+      dataBits: [8],
+      stopBits: [1]
     });
   }
 

@@ -1,7 +1,9 @@
+import { BusConfigurationDb } from './../../model/busConfigurationDb';
 import { InfoPacket } from './../../model/info-packet';
 import { DispatchService } from './../dispatch/dispatch.service';
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
+import { HamBusError } from 'src/app/model/master-status';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +22,21 @@ export class SignalrService {
   public loginResponse = (resp: InfoPacket): void => {
     this.dispatcher.loginPacket(resp);
   }
+  public saveResponse = (resp: HamBusError): void => {
+    this.dispatcher.saveConfigStatus(resp);
+  }
 
   private login(): void {
     const groupList: Array<string> = [];
     groupList.push('ui');
     const emptyPortList = [];
     this.connection.invoke('Login', 'control', groupList, emptyPortList).catch((err) => {
+      console.log(err.toString());
+    });
+  }
+  public saveConfig(name: string, conf: BusConfigurationDb): void {
+
+    this.connection.invoke('SaveConfiguration', name, conf).catch((err) => {
       console.log(err.toString());
     });
   }
@@ -51,5 +62,6 @@ export class SignalrService {
 
   private setupResponses(): void {
     this.connection.on('InfoPacket', this.loginResponse);
+    this.connection.on('SaveResults', this.saveResponse)
   }
 }
