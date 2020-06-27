@@ -14,11 +14,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DashBoardComponent } from './components/dash-board/dash-board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RigBusEditComponent
+    RigBusEditComponent,
+    DashBoardComponent
   ],
   imports: [
     BrowserModule,

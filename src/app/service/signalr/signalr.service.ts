@@ -24,7 +24,8 @@ export class SignalrService {
   private login(): void {
     const groupList: Array<string> = [];
     groupList.push('ui');
-    this.connection.invoke('Login', 'control', groupList).catch((err) => {
+    const emptyPortList = [];
+    this.connection.invoke('Login', 'control', groupList, emptyPortList).catch((err) => {
       console.log(err.toString());
     });
   }
@@ -39,6 +40,8 @@ export class SignalrService {
     this.connection.start().then(() => {
       console.log('Connected!');
       this.setupResponses();
+
+      // TODO: This should be called someplace else
       this.login();
     }).catch((err) => {
       console.error(err.toString());

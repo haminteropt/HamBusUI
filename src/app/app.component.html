@@ -1,9 +1,10 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav mode="side" #sidenav opened="false" position="start">
-    <a [routerLink]="['home']" routerLinkActive="active">Home</a>
-    <p></p>
-    <a [routerLink]="['rigEdit']" routerLinkActive="active">Rig Edit</a>
+    <button mat-button>Home</button>
+    <button mat-button color="primary" (click)="homeClick()">Home</button>
+    <button mat-button color="primary" (click)="rigClick()">Rig</button>
   </mat-sidenav>
+
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button mat-icon-button (click)="sidenav.toggle()">
@@ -13,6 +14,7 @@
       <span class="toolbar-spacer"></span>
       Unused
     </mat-toolbar>
+    <app-dash-board></app-dash-board>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
