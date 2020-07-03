@@ -1,9 +1,9 @@
 import { BusType } from './bus-type.enum';
 
 export class BusConfigurationDb {
-    public id: number;
+    public id?: number = null;
     public name: string;
-    public version: string;
+    public version: number;
     public busType: BusType;
     public configuration: string;
 

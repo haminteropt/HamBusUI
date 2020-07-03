@@ -1,5 +1,6 @@
-import { DispatchService } from './service/dispatch/dispatch.service';
-import { SignalrService } from './service/signalr/signalr.service';
+import { DispatchService } from 'src/app/network-layer/dispatch.service';
+
+import { SignalrService } from './network-layer/signalr.service';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -20,7 +21,7 @@ export class AppComponent {
     console.log("rig click");
     this.router.navigate(['/rigEdit'])
   }
-  
+
   public homeClick(): void {
     console.log("home click");
     this.router.navigate(['/home']);

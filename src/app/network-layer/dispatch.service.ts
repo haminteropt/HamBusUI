@@ -1,7 +1,8 @@
-import { HamBusError } from './../../model/master-status';
-import { InfoPacket } from './../../model/info-packet';
+import { HamBusError } from './../model/master-status';
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { InfoPacket } from '../model/info-packet';
 
 
 @Injectable({

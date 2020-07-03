@@ -1,13 +1,13 @@
-import { SignalrService } from './../../service/signalr/signalr.service';
+import { SignalrService } from '../../network-layer/signalr.service';
 import { BusConfigurationDb } from './../../model/busConfigurationDb';
 import { InfoPacket } from './../../model/info-packet';
 
 
 import { OnDestroy } from '@angular/core';
-import { DispatchService } from './../../service/dispatch/dispatch.service';
 import { Component, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-pages/basepage';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { DispatchService } from 'src/app/network-layer/dispatch.service';
 
 @Component({
   selector: 'app-rig-bus-edit',
@@ -32,13 +32,14 @@ export class RigBusEditComponent extends BasePage implements OnInit, OnDestroy {
 
     if (!this.conf.id) {
       this.conf.name = this.rigForm.get('name').value;
-      this.conf.version = '';
+
+      this.conf.version = 1;
       this.conf.configuration = JSON.stringify(this.rigForm.value);
     } else {
       this.conf.name = this.rigForm.get('name').value;
       this.conf.configuration = JSON.stringify(this.rigForm.value);
     }
-    this.sigR.saveConfig('', this.conf);
+    this.sigR.saveConfig(this.conf.name, this.conf);
     console.log(this.rigForm.value);
   }
 
