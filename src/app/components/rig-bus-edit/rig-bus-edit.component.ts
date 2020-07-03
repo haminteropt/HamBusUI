@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-pages/basepage';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DispatchService } from 'src/app/network-layer/dispatch.service';
+import { BusType } from 'src/app/model/bus-type.enum';
 
 @Component({
   selector: 'app-rig-bus-edit',
@@ -39,8 +40,9 @@ export class RigBusEditComponent extends BasePage implements OnInit, OnDestroy {
       this.conf.name = this.rigForm.get('name').value;
       this.conf.configuration = JSON.stringify(this.rigForm.value);
     }
+    this.conf.busType = BusType.RigBus;
     this.sigR.saveConfig(this.conf.name, this.conf);
-    console.log(this.rigForm.value);
+    console.log(this.conf);
   }
 
   public newClick(): void {
