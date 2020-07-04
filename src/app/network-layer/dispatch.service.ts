@@ -14,6 +14,7 @@ export class DispatchService {
   public saveConfigureStatus$: BehaviorSubject<any> = new BehaviorSubject(null);
   constructor() { }
   public loginPacket(infoPacket: InfoPacket): void {
+    console.log(infoPacket);
     this.busChanges$.next(infoPacket);
   }
   public saveConfigStatus(status: HamBusError) {
