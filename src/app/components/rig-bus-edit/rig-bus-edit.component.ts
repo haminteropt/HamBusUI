@@ -59,11 +59,11 @@ export class RigBusEditComponent extends BasePage implements OnInit, OnDestroy {
   private buildFormGroup(): void {
     this.rigForm = this.fb.group({
       name: ['foo'],
-      portName: [],
       baudRate: [19200],
       parity: ['none'],
       dataBits: [8],
-      stopBits: [1]
+      stopBits: ['1'],
+      commPortName: ['']
     });
   }
 

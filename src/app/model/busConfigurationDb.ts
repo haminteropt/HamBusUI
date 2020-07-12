@@ -5,6 +5,6 @@ export class BusConfigurationDb {
     public name: string;
     public version: number;
     public busType: BusType;
-    public configuration: string;
+    public configuration: string; 
 
 }
