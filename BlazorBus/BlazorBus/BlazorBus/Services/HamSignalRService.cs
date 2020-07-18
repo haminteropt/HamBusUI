@@ -8,5 +8,9 @@ namespace BlazorBus.Services
 {
   public class HamSignalRService : IHamSignalRService
   {
+    public HamSignalRService()
+    {
+      Console.WriteLine("HamSignalService is instan");
+    }
   }
 }
