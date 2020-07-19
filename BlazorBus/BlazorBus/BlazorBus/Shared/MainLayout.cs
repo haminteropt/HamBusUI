@@ -17,12 +17,12 @@ namespace BlazorBus.Shared
       {
         if (firstRender)
         {
-          var conn = await SigR.StartService("http://localhost:7300/masterbus");
+          //var conn = await SigR.StartService("http://localhost:7300/masterbus");
           List<string> groupList = new List<string>();
           groupList.Add("radio");
           groupList.Add("logging");
           groupList.Add("ui");
-          await conn.InvokeAsync("Login", "control", groupList);
+          //await conn.InvokeAsync("Login", "control", groupList);
         }
       }
       catch (Exception e)
