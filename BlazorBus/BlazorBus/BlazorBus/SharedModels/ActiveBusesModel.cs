@@ -2,7 +2,7 @@
 
 namespace BlazorBus.SharedModels
 {
-  public class ActiveBusesModel
+  public class ActiveBusesModel : HamBusBase
   {
     public int? Id { get; set; }
     public string Name { get; set; }

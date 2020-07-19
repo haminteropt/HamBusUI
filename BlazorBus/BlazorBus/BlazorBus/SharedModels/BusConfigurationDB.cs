@@ -1,7 +1,7 @@
 ﻿namespace BlazorBus.SharedModels
 {
 
-  public class BusConfigurationDB
+  public class BusConfigurationDB : HamBusBase
   {
     public long? Id { get; set; }
     public string Name { get; set; } = "";

@@ -2,7 +2,7 @@
 
 namespace BlazorBus.SharedModels
 {
-  public class BusConfigBase
+  public class BusConfigBase : HamBusBase
   {
     public Boolean AcceptRigStateUpdates { get; set; } = false;
 

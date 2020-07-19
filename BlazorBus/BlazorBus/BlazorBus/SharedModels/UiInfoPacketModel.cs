@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BlazorBus.SharedModels
 {
-  public class UiInfoPacketModel
+  public class UiInfoPacketModel : HamBusBase
   {
     public List<ActiveBusesModel> ActiveBuses { get; set; } = new List<ActiveBusesModel>();
     public List<BusConfigurationDB> BusesInDb { get; set; } = new List<BusConfigurationDB>();
