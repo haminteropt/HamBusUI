@@ -24,6 +24,8 @@ namespace BlazorBus.Components
          .AddStyle("border", "1px solid black")
        .Build();
 
+      SigR.StartService("http://localhost:7300/masterbus");
+
     }
     protected override void OnAfterRender(bool firstRender)
     {
