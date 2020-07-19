@@ -11,10 +11,10 @@ namespace BlazorBus.Services
 {
   public interface IHamSignalRService
   {
-    //ReplaySubject<UiInfoPacketModel> InfoPacket__ { get; set; }
-    //ReplaySubject<RigState> RigState__ { get; set; }
-    //BehaviorSubject<HamBusError> HBErrors__ { get; set; }
-    //Subject<HamBusError> SaveResults { get; set; }
+    ReplaySubject<UiInfoPacketModel> InfoPacket__ { get; set; }
+    ReplaySubject<RigState> RigState__ { get; set; }
+    BehaviorSubject<HamBusError> HBErrors__ { get; set; }
+    Subject<HamBusError> SaveResults { get; set; }
 
     Task<HubConnection> StartService(string url);
   }

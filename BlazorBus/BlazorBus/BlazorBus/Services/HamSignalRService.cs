@@ -13,13 +13,13 @@ namespace BlazorBus.Services
 {
   public class HamSignalRService : IHamSignalRService
   {
-    //#region Observibles 
-    //public ReplaySubject<UiInfoPacketModel> InfoPacket__ { get; set; } = new ReplaySubject<UiInfoPacketModel>(1);
-    //public ReplaySubject<RigState> RigState__ { get; set; } = new ReplaySubject<RigState>(1);
+    #region Observibles 
+    public ReplaySubject<UiInfoPacketModel> InfoPacket__ { get; set; } = new ReplaySubject<UiInfoPacketModel>(1);
+    public ReplaySubject<RigState> RigState__ { get; set; } = new ReplaySubject<RigState>(1);
 
-    //public BehaviorSubject<HamBusError> HBErrors__ { get; set; } = new BehaviorSubject<HamBusError>(null);
-    //public Subject<HamBusError> SaveResults { get; set; } = new Subject<HamBusError>();
-    //#endregion
+    public BehaviorSubject<HamBusError> HBErrors__ { get; set; } = new BehaviorSubject<HamBusError>(null);
+    public Subject<HamBusError> SaveResults { get; set; } = new Subject<HamBusError>();
+    #endregion
 
     private HubConnection connection;
     public HamSignalRService()
