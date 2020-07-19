@@ -5,11 +5,18 @@ using System.Threading.Tasks;
 using HamBusBlazorLibrary.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
+using BlazorBus.SharedModels;
 
 namespace BlazorBus.Services
 {
   public class HamSignalRService : IHamSignalRService
   {
+
+    public Subject<UiInfoPacketModel> InfoPacket__ { get; set; } = new Subject<UiInfoPacketModel>();
+    public Subject<HamBusError> HBErrors__ { get; set; } = new Subject<HamBusError>();
+
     private HubConnection connection;
     public HamSignalRService()
     {
@@ -38,7 +45,7 @@ namespace BlazorBus.Services
       try
       {
         await connection.StartAsync();
-        //connection.On<HamBusError>("ErrorReport", ErrorReport);
+        BuildResponseActions();
       }
       catch (Exception ex)
       {
@@ -47,6 +54,14 @@ namespace BlazorBus.Services
       }
 
       return connection;
+    }
+
+    private void BuildResponseActions()
+    {
+      connection.On<HamBusError>("ErrorReport", (errorReport) =>
+      {
+        HBErrors__.OnNext(errorReport);
+      });
     }
   }
 }

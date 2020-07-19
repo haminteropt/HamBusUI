@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
 
+
 namespace BlazorBus.Services
 {
   public interface IHamSignalRService
