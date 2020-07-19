@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorBus.Components
 {
-  public partial class DashBoard
+  public partial class DashBoard : ComponentBase
   {
     public string FirstRadio { get; set; }
     [Inject]
@@ -19,23 +19,13 @@ namespace BlazorBus.Components
 
     void Change(MouseEventArgs e)
     {
-      StyleToRender  =
+      StyleToRender =
          StyleBuilder.Default("background-color", "red")
          .AddStyle("border", "1px solid black")
        .Build();
 
       SigR.StartService("http://localhost:7300/masterbus");
-
-    }
-    protected override void OnAfterRender(bool firstRender)
-    {
-
-      //Thread.Sleep(10000);
-      //FirstRadio = new CssBuilder()
-      //                    .AddClass("radio-color")
-      //                    .Build();
-
-
+      
     }
 
   }

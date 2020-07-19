@@ -65,6 +65,6 @@ export class SignalrService {
 
   private setupResponses(): void {
     this.connection.on('InfoPacket', this.loginResponse);
-    this.connection.on('SaveResults', this.saveResponse)
+    this.connection.on('SaveResults', this.saveResponse);
   }
 }
