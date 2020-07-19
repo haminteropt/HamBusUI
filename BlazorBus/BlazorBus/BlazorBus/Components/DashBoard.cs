@@ -21,10 +21,10 @@ namespace BlazorBus.Components
 
     public DashBoard() 
     {
-      //SigR.InfoPacket__.Subscribe<UiInfoPacketModel>((info) =>
-      //{
-      //  Console.WriteLine(info.ToString());
-      //});
+      SigR.InfoPacket__.Subscribe<UiInfoPacketModel>((info) =>
+      {
+        Console.WriteLine(info.ToString());
+      });
     }
     void Change(MouseEventArgs e)
     {
