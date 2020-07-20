@@ -21,10 +21,7 @@ namespace BlazorBus.Components
 
     public DashBoard() 
     {
-      //SigR.InfoPacket__.Subscribe<UiInfoPacketModel>((info) =>
-      //{
-      //  Console.WriteLine(info.ToString());
-      //});
+
     }
     void Change(MouseEventArgs e)
     {
@@ -33,10 +30,15 @@ namespace BlazorBus.Components
          .AddStyle("border", "1px solid black")
        .Build();
     }
-    //protected async override Task OnAfterRenderAsync(bool firstRender)
-    //{
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+      //this causes crash
+      SigR.InfoPacket__.Subscribe<UiInfoPacketModel>((info) =>
+      {
+        Console.WriteLine("in sub");
+        Console.WriteLine(info.ToString());
+      });
 
-      
-    //}
+    }
   }
 }
