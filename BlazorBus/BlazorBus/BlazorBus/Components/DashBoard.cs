@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using BlazorBus.Services;
@@ -35,6 +36,7 @@ namespace BlazorBus.Components
       //this causes crash
       SigR.InfoPacket__.Subscribe<UiInfoPacketModel>((info) =>
       {
+        Console.WriteLine(JsonSerializer.Serialize(info));
         Console.WriteLine("in sub");
         Console.WriteLine(info.ToString());
       });

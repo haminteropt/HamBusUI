@@ -13,7 +13,7 @@ namespace BlazorBus.Services
 {
   public class HamSignalRService : IHamSignalRService
   {
-    #region Observibles 
+    #region Observables 
     public ReplaySubject<UiInfoPacketModel> InfoPacket__ { get; set; } = new ReplaySubject<UiInfoPacketModel>(1);
     public ReplaySubject<RigState> RigState__ { get; set; } = new ReplaySubject<RigState>(1);
 
