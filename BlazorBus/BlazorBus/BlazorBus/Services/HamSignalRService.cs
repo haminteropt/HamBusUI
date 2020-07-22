@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HamBusBlazorLibrary.Services;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.SignalR.Client;
-using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Threading.Tasks;
 using BlazorBus.SharedModels;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace BlazorBus.Services
 {
@@ -64,11 +59,15 @@ namespace BlazorBus.Services
     {
       //  connection.On<HamBusError>("ErrorReport", (errorReport) => HBErrors__.OnNext(errorReport));
       connection.On<UiInfoPacketModel>("InfoPacket", (info) =>
-        {
-          info.ToString();
-          InfoPacket__.OnNext(info);
-        });
-      //  connection.On<RigState>("ErrorReport", (info) => RigState__.OnNext(info));
+      {
+        Console.WriteLine("in info");
+        InfoPacket__.OnNext(info);
+      });
+      connection.On<RigState>("state", (state) =>
+      {
+        Console.WriteLine("in update state");
+        RigState__.OnNext(state);
+      });
     }
-    }
+  }
 }

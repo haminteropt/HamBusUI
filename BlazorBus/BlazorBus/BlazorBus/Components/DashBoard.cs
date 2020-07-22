@@ -17,6 +17,7 @@ namespace BlazorBus.Components
     public string FirstRadio { get; set; }
     [Inject]
     public IHamSignalRService SigR { get; set; }
+    public decimal Frequency { get; set; }
 
     protected string StyleToRender;
 
@@ -39,6 +40,14 @@ namespace BlazorBus.Components
         Console.WriteLine(JsonSerializer.Serialize(info));
         Console.WriteLine("in sub");
         Console.WriteLine(info.ToString());
+      });
+
+      SigR.RigState__.Subscribe<RigState>((state) =>
+      {
+        var dFreq = Convert.ToDecimal(state.Freq);
+        Frequency = dFreq / 1000000.0m;
+        Console.WriteLine($"Frequency: {Frequency}");
+
       });
 
     }
