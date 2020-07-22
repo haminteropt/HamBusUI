@@ -1,22 +1,25 @@
-﻿<style>
+﻿@inherits BusDashBoardBase
+<style>
     .bus-card {
         padding: 3px;
         margin: 5px;
     }
+
     .wrapper {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
+
     .radio-color {
         background-color: red;
     }
 </style>
 
-<h3>DashBoard</h3>
+<h3>DashBoard @Frequency</h3>
 <div class="wrapper">
     <div class="mat-elevation-z7 bus-card " OnClick="Change" style="@StyleToRender">
         Flex 3000
-        <MatButton  OnClick="Change" >Change</MatButton>
+        <MatButton OnClick="Change">Change</MatButton>
     </div>
     <div class="mat-elevation-z7 bus-card">
         SDRUno

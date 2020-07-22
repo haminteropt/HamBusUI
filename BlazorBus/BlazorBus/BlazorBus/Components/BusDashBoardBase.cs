@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using BlazorBus.Services;
 using BlazorBus.SharedModels;
@@ -12,21 +11,22 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorBus.Components
 {
-  public partial class DashBoard : ComponentBase
+  public class BusDashBoardBase : ComponentBase
   {
     public string FirstRadio { get; set; }
     [Inject]
     public IHamSignalRService SigR { get; set; }
-    public decimal Frequency { get; set; }
+    [Parameter]
+    public decimal Frequency { get; set; } = 0.0m;
+    private long freqLong;
 
     protected string StyleToRender;
 
-    public DashBoard() 
+
+
+    public void Change(MouseEventArgs e)
     {
 
-    }
-    void Change(MouseEventArgs e)
-    {
       StyleToRender =
          StyleBuilder.Default("background-color", "red")
          .AddStyle("border", "1px solid black")
@@ -34,7 +34,7 @@ namespace BlazorBus.Components
     }
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
-      //this causes crash
+
       SigR.InfoPacket__.Subscribe<UiInfoPacketModel>((info) =>
       {
         Console.WriteLine(JsonSerializer.Serialize(info));
@@ -44,8 +44,11 @@ namespace BlazorBus.Components
 
       SigR.RigState__.Subscribe<RigState>((state) =>
       {
-        var dFreq = Convert.ToDecimal(state.Freq);
+        if (freqLong == state.Freq) return;
+        freqLong = state.Freq;
+        var dFreq = Convert.ToDecimal(freqLong);
         Frequency = dFreq / 1000000.0m;
+        StateHasChanged();
         Console.WriteLine($"Frequency: {Frequency}");
 
       });
