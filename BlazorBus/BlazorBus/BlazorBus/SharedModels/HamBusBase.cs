@@ -8,8 +8,10 @@ namespace BlazorBus.SharedModels
 {
   public  class HamBusBase
   {
+
     public override string ToString()
     {
+      
       var options = new JsonSerializerOptions
       {
         //PropertyNamingPolicy = JsonNamingPolicy.CamelCase,

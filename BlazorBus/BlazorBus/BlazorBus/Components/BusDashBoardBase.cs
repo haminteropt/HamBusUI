@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using BlazorBus.Services;
@@ -19,6 +20,7 @@ namespace BlazorBus.Components
     [Parameter]
     public decimal Frequency { get; set; } = 0.0m;
     private long freqLong;
+    private long SerialNum { get; set; } = 0;
 
     protected string StyleToRender;
 
@@ -44,12 +46,14 @@ namespace BlazorBus.Components
 
       SigR.RigState__.Subscribe<RigState>((state) =>
       {
-        if (freqLong == state.Freq) return;
+        if (this.SerialNum == state.SerialNum) return;
+        SerialNum = state.SerialNum;
+        Console.WriteLine($"saved serial# {this.SerialNum}");
         freqLong = state.Freq;
-        var dFreq = Convert.ToDecimal(freqLong);
-        Frequency = dFreq / 1000000.0m;
+        Frequency = Convert.ToDecimal(freqLong)/ 1000000.0m;
+        //Frequency = dFreq / 1000000.0m;
         StateHasChanged();
-        Console.WriteLine($"Frequency: {Frequency}");
+        Console.WriteLine($"Frequency: {Frequency} Serial Num: {state.SerialNum}");
 
       });
 

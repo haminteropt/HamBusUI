@@ -23,7 +23,8 @@ namespace BlazorBus.SharedModels
     public bool Tx { get; set; }
     public string? Vfo { get; set; }
     public string? Xit { get; set; }
-    #nullable disable
+    public long SerialNum { get; set; }
+#nullable disable
     public Object Clone()
     {
       return (RigState)MemberwiseClone();
