@@ -48,10 +48,8 @@ namespace BlazorBus.Components
       {
         if (this.SerialNum == state.SerialNum) return;
         SerialNum = state.SerialNum;
-        Console.WriteLine($"saved serial# {this.SerialNum}");
         freqLong = state.Freq;
         Frequency = Convert.ToDecimal(freqLong)/ 1000000.0m;
-        //Frequency = dFreq / 1000000.0m;
         StateHasChanged();
         Console.WriteLine($"Frequency: {Frequency} Serial Num: {state.SerialNum}");
 

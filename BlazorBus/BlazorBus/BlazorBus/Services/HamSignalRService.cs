@@ -57,7 +57,7 @@ namespace BlazorBus.Services
 
     private void BuildResponseActions()
     {
-      //  connection.On<HamBusError>("ErrorReport", (errorReport) => HBErrors__.OnNext(errorReport));
+      connection.On<HamBusError>("ErrorReport", (errorReport) => HBErrors__.OnNext(errorReport));
       connection.On<UiInfoPacketModel>("InfoPacket", (info) =>
       {
         Console.WriteLine("in info");
