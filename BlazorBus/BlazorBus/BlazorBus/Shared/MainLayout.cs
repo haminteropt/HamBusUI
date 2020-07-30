@@ -21,6 +21,7 @@ namespace BlazorBus.Shared
           List<string> groupList = new List<string>();
           groupList.Add("logging");
           groupList.Add("ui");
+          groupList.Add("control");
           await conn.InvokeAsync("Login", "control", groupList);
         }
       }

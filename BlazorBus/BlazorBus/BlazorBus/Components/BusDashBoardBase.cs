@@ -46,6 +46,7 @@ namespace BlazorBus.Components
 
       SigR.RigState__.Subscribe<RigState>((state) =>
       {
+        Console.WriteLine($"Frequency: {Frequency} Serial Num: {state.SerialNum}");
         if (this.SerialNum == state.SerialNum) return;
         SerialNum = state.SerialNum;
         freqLong = state.Freq;
