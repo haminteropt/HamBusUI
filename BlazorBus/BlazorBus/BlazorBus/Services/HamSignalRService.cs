@@ -66,7 +66,7 @@ namespace BlazorBus.Services
       });
       connection.On<RigState>("state", (state) =>
       {
-        Console.WriteLine("in update state");
+        Console.WriteLine($"in update state {state.SerialNumDym} {state.Freq}");
         RigState__.OnNext(state);
       });
     }
