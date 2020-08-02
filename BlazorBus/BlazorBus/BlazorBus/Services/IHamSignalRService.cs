@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using BlazorBus.SharedModels;
+using HamBusCommmonStd;
 using Microsoft.AspNetCore.SignalR.Client;
 
 

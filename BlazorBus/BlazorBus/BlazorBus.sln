@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorBus", "BlazorBus\Blaz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamBusBlazorLibrary", "HamBusBlazorLibrary\HamBusBlazorLibrary.csproj", "{74E89AE4-6BB3-4EB5-B17E-D51208B37FDD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamBusCommonStd", "..\..\..\HamBusCommonStd\HamBusCommonStd\HamBusCommonStd.csproj", "{9000B70F-B6B6-4ABF-858F-CEACF749C953}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{74E89AE4-6BB3-4EB5-B17E-D51208B37FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74E89AE4-6BB3-4EB5-B17E-D51208B37FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74E89AE4-6BB3-4EB5-B17E-D51208B37FDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9000B70F-B6B6-4ABF-858F-CEACF749C953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9000B70F-B6B6-4ABF-858F-CEACF749C953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9000B70F-B6B6-4ABF-858F-CEACF749C953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9000B70F-B6B6-4ABF-858F-CEACF749C953}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
