@@ -47,13 +47,13 @@ namespace BlazorBus.Components
 
       SigR.RigState__.Subscribe<RigState>((state) =>
       {
-        Console.WriteLine($"Frequency: {Frequency} Serial Num: {state.SerialNum}");
+
         if (this.SerialNum == state.SerialNumDym) return;
         SerialNum = state.SerialNumDym;
         freqLong = state.Freq;
         Frequency = Convert.ToDecimal(freqLong)/ 1000000.0m;
         StateHasChanged();
-        Console.WriteLine($"Frequency: {Frequency} Serial Num: {state.SerialNumDym}");
+        //Console.WriteLine($"Frequency: {Frequency} Serial Num: {state.SerialNumDym}");
 
       });
 
