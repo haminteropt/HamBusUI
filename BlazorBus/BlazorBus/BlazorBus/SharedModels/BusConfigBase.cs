@@ -1,4 +1,5 @@
 ﻿using System;
+using HamBusCommonStd.Model;
 
 namespace BlazorBus.SharedModels
 {
