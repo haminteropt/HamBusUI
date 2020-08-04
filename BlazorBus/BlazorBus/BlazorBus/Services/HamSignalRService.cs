@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using BlazorBus.SharedModels;
-using HamBusCommmonStd;
 using HamBusCommonStd;
 using Microsoft.AspNetCore.SignalR.Client;
 
@@ -11,12 +11,13 @@ namespace BlazorBus.Services
   public class HamSignalRService : IHamSignalRService
   {
     #region Observables 
+    public Subject<ActiveBusesModel> ActiveUpdate__ { get; set; } = new Subject<ActiveBusesModel>();
     public Subject<UiInfoPacketModel> InfoPacket__ { get; set; } = new Subject<UiInfoPacketModel>();
     public Subject<RigState> RigState__ { get; set; } = new Subject<RigState>();
 
     public BehaviorSubject<HamBusError> HBErrors__ { get; set; } = new BehaviorSubject<HamBusError>(null);
-    public Subject<HamBusError> SaveResults { get; set; } = new Subject<HamBusError>();
-    #endregion
+    public Subject<HamBusError> SaveResults__ { get; set; } = new Subject<HamBusError>();
+   #endregion
 
     private HubConnection connection;
     public HamSignalRService()
@@ -59,14 +60,18 @@ namespace BlazorBus.Services
 
     private void BuildResponseActions()
     {
-      connection.On<HamBusError>("ErrorReport", (errorReport) => HBErrors__.OnNext(errorReport));
-      connection.On<UiInfoPacketModel>("InfoPacket", (info) =>
+      connection.On<HamBusError>(SignalRCommands.ErrorReport, (errorReport) => HBErrors__.OnNext(errorReport));
+      connection.On<UiInfoPacketModel>(SignalRCommands.InfoPacket, (info) =>
       {
         InfoPacket__.OnNext(info);
       });
-      connection.On<RigState>("state", (state) =>
+      connection.On<RigState>(SignalRCommands.State, (state) =>
       {
         RigState__.OnNext(state);
+      });
+      connection.On<ActiveBusesModel>(SignalRCommands.ActiveUpdate, (update) =>
+      {
+        ActiveUpdate__.OnNext(update);
       });
     }
   }
