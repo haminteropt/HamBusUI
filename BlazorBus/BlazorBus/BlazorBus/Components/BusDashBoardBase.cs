@@ -41,9 +41,6 @@ namespace BlazorBus.Components
         {
           Console.WriteLine($"info: {active.Name}");
         }
-        //Console.WriteLine(JsonSerializer.Serialize(info));
-        //Console.WriteLine("in sub");
-        //Console.WriteLine(info.ToString());
       });
 
       SigR.ActiveUpdate__.Subscribe<ActiveBusesModel>(active =>

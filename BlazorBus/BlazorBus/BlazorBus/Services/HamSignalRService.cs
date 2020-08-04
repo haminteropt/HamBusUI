@@ -1,23 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using BlazorBus.SharedModels;
 using HamBusCommonStd;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace BlazorBus.Services
 {
   public class HamSignalRService : IHamSignalRService
   {
+    [Inject]
+    private ActiveBusesService ActiveBuses { get; set; }
     #region Observables 
     public Subject<ActiveBusesModel> ActiveUpdate__ { get; set; } = new Subject<ActiveBusesModel>();
     public Subject<UiInfoPacketModel> InfoPacket__ { get; set; } = new Subject<UiInfoPacketModel>();
     public Subject<RigState> RigState__ { get; set; } = new Subject<RigState>();
-
     public BehaviorSubject<HamBusError> HBErrors__ { get; set; } = new BehaviorSubject<HamBusError>(null);
     public Subject<HamBusError> SaveResults__ { get; set; } = new Subject<HamBusError>();
-   #endregion
+    #endregion
+
+    
 
     private HubConnection connection;
     public HamSignalRService()
