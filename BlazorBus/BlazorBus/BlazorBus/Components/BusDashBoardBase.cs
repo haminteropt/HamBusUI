@@ -37,11 +37,22 @@ namespace BlazorBus.Components
 
       SigR.InfoPacket__.Subscribe<UiInfoPacketModel>((info) =>
       {
-        Console.WriteLine(JsonSerializer.Serialize(info));
-        Console.WriteLine("in sub");
-        Console.WriteLine(info.ToString());
+        foreach (var active in info.ActiveBuses)
+        {
+          Console.WriteLine($"info: {active.Name}");
+        }
+        //Console.WriteLine(JsonSerializer.Serialize(info));
+        //Console.WriteLine("in sub");
+        //Console.WriteLine(info.ToString());
       });
 
+      SigR.ActiveUpdate__.Subscribe<ActiveBusesModel>(active =>
+      {
+        if (active.IsActive)
+          Console.WriteLine($"Bus {active.Name} added");
+        else
+          Console.WriteLine($"Bus {active.Name} removed");
+      });
       SigR.RigState__.Subscribe<RigState>((state) =>
       {
 

@@ -71,6 +71,7 @@ namespace BlazorBus.Services
       });
       connection.On<ActiveBusesModel>(SignalRCommands.ActiveUpdate, (update) =>
       {
+        Console.WriteLine("got update");
         ActiveUpdate__.OnNext(update);
       });
     }

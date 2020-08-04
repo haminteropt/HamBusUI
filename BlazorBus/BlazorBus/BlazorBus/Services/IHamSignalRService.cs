@@ -13,7 +13,7 @@ namespace BlazorBus.Services
     Subject<RigState> RigState__ { get; set; }
     BehaviorSubject<HamBusError> HBErrors__ { get; set; }
     Subject<HamBusError> SaveResults__ { get; set; }
-
+    Subject<ActiveBusesModel> ActiveUpdate__ { get; set; }
     Task<HubConnection> StartService(string url);
   }
 }
