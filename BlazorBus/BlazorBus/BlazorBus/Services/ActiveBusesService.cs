@@ -3,10 +3,12 @@ using HamBusCommonStd;
 
 namespace BlazorBus.Services
 {
-  public class ActiveBusesService
+  public class ActiveBusesService : IActiveBusesService
   {
-    public List<ActiveBusesModel> ActiveBuses { get; set; }
+    public List<ActiveBusesModel> ActiveBuses { get; set; } = new List<ActiveBusesModel>();
 
+    public ActiveBusesService() 
+    { }
     public void BusUpdate(ActiveBusesModel bus)
     {
       int index = ActiveBuses.FindIndex(item => item.Name.Equals(bus.Name));

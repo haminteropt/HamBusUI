@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reactive.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using BlazorBus.Services;
 using BlazorComponentUtilities;
@@ -13,10 +13,17 @@ namespace BlazorBus.Components
   public class BusDashBoardBase : ComponentBase
   {
     public string FirstRadio { get; set; }
+
+    [Inject]
+    public IActiveBusesService BusServie {get;set;}
     [Inject]
     public IHamSignalRService SigR { get; set; }
+
     [Parameter]
+
     public decimal Frequency { get; set; } = 0.0m;
+
+  
     private long freqLong;
     private long SerialNum { get; set; } = 0;
 
@@ -37,18 +44,22 @@ namespace BlazorBus.Components
 
       SigR.InfoPacket__.Subscribe<UiInfoPacketModel>((info) =>
       {
+        BusServie.ActiveBuses = info.ActiveBuses;
         foreach (var active in info.ActiveBuses)
         {
           Console.WriteLine($"info: {active.Name}");
         }
+        StateHasChanged();
       });
 
       SigR.ActiveUpdate__.Subscribe<ActiveBusesModel>(active =>
       {
+        BusServie.BusUpdate(active);
         if (active.IsActive)
           Console.WriteLine($"Bus {active.Name} added");
         else
           Console.WriteLine($"Bus {active.Name} removed");
+        StateHasChanged();
       });
       SigR.RigState__.Subscribe<RigState>((state) =>
       {
@@ -56,7 +67,7 @@ namespace BlazorBus.Components
         if (this.SerialNum == state.SerialNumDym) return;
         SerialNum = state.SerialNumDym;
         freqLong = state.Freq;
-        Frequency = Convert.ToDecimal(freqLong)/ 1000000.0m;
+        Frequency = Convert.ToDecimal(freqLong) / 1000000.0m;
         StateHasChanged();
         //Console.WriteLine($"Frequency: {Frequency} Serial Num: {state.SerialNumDym}");
 
