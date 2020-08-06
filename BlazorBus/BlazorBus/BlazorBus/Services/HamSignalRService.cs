@@ -14,6 +14,9 @@ namespace BlazorBus.Services
   {
     [Inject]
     private ActiveBusesService ActiveBuses { get; set; }
+
+    [Inject]
+    private BusStatusService BusService { get; set; }
     #region Observables 
     public Subject<ActiveBusesModel> ActiveUpdate__ { get; set; } = new Subject<ActiveBusesModel>();
     public Subject<UiInfoPacketModel> InfoPacket__ { get; set; } = new Subject<UiInfoPacketModel>();
@@ -68,15 +71,17 @@ namespace BlazorBus.Services
       connection.On<HamBusError>(SignalRCommands.ErrorReport, (errorReport) => HBErrors__.OnNext(errorReport));
       connection.On<UiInfoPacketModel>(SignalRCommands.InfoPacket, (info) =>
       {
+        BusService.UpdateFromInfoPacket(info);
         InfoPacket__.OnNext(info);
       });
       connection.On<RigState>(SignalRCommands.State, (state) =>
       {
+        BusService.UpdateState(state);
         RigState__.OnNext(state);
       });
       connection.On<ActiveBusesModel>(SignalRCommands.ActiveUpdate, (update) =>
       {
-        Console.WriteLine("got update");
+        BusService.UpdateActiveBuses(update);
         ActiveUpdate__.OnNext(update);
       });
     }

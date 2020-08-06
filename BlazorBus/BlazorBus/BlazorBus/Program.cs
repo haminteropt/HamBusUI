@@ -19,6 +19,7 @@ namespace BlazorBus
       builder.RootComponents.Add<App>("app");
       builder.Services.AddSingleton<IHamSignalRService, HamSignalRService>();
       builder.Services.AddSingleton<IActiveBusesService, ActiveBusesService>();
+      builder.Services.AddSingleton<BusStatusService, BusStatusService>();
       builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }
       )
       

@@ -15,13 +15,19 @@
     .radio-color {
         background-color: red;
     }
+    .active {
+        background-color: lightgreen;
+    }
+    .inActive {
+        background-color: orangered;
+    }
 </style>
 
 <h3>DashBoard @Frequency</h3>
 <div class="wrapper">
-    @foreach (var bus in BusServie.ActiveBuses)
+    @foreach (var bus in BusService.BusModelList)
     {
-        <div class="mat-elevation-z7 bus-card " OnClick="Change" style="@StyleToRender">
+        <div class="mat-elevation-z7 bus-card @GetClass(bus.ActiveBus.IsActive) " OnClick="Change" style="@StyleToRender">
             @bus.Name
             <MatButton OnClick="Change">Change</MatButton>
         </div>

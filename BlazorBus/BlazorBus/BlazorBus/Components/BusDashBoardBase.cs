@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using BlazorBus.Services;
@@ -15,7 +14,9 @@ namespace BlazorBus.Components
     public string FirstRadio { get; set; }
 
     [Inject]
-    public IActiveBusesService BusServie {get;set;}
+    public IActiveBusesService ActiveBusServie { get; set; }
+    [Inject]
+    public BusStatusService BusService { get; set; }
     [Inject]
     public IHamSignalRService SigR { get; set; }
 
@@ -23,13 +24,18 @@ namespace BlazorBus.Components
 
     public decimal Frequency { get; set; } = 0.0m;
 
-  
+    public string activeClass = "active";
+    public string inActiveClass = "inActive";
     private long freqLong;
     private long SerialNum { get; set; } = 0;
 
     protected string StyleToRender;
 
-
+    public string GetClass(bool isActive)
+    {
+      if (isActive) return activeClass;
+      return inActiveClass;
+    }
 
     public void Change(MouseEventArgs e)
     {
@@ -44,7 +50,7 @@ namespace BlazorBus.Components
 
       SigR.InfoPacket__.Subscribe<UiInfoPacketModel>((info) =>
       {
-        BusServie.ActiveBuses = info.ActiveBuses;
+        ActiveBusServie.ActiveBuses = info.ActiveBuses;
         foreach (var active in info.ActiveBuses)
         {
           Console.WriteLine($"info: {active.Name}");
@@ -54,7 +60,7 @@ namespace BlazorBus.Components
 
       SigR.ActiveUpdate__.Subscribe<ActiveBusesModel>(active =>
       {
-        BusServie.BusUpdate(active);
+        ActiveBusServie.BusUpdate(active);
         if (active.IsActive)
           Console.WriteLine($"Bus {active.Name} added");
         else
