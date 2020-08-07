@@ -16,7 +16,7 @@ namespace BlazorBus.Components
     [Inject]
     public IActiveBusesService ActiveBusServie { get; set; }
     [Inject]
-    public BusStatusService BusService { get; set; }
+    public IBusStatusService BusService { get; set; }
     [Inject]
     public IHamSignalRService SigR { get; set; }
 
@@ -35,6 +35,12 @@ namespace BlazorBus.Components
     {
       if (isActive) return activeClass;
       return inActiveClass;
+    }
+    public string FormatFreq()
+    {
+      var f = Frequency;
+      Console.WriteLine($"freq: {f}  {Frequency}");
+      return f.ToString();
     }
 
     public void Change(MouseEventArgs e)

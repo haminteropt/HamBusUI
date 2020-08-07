@@ -9,7 +9,27 @@
 
     .wrapper {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+
+    }
+    .name {
+        grid-area: name;
+    }
+    .freq {
+        grid-area: freq;
+    }
+    .mode {
+        grid-area: mode;
+    }
+    .locked {
+        grid-area: locked
+    }
+    .bus-wrapper {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-areas: 
+            "name            locked"
+            "freq            mode";
     }
 
     .radio-color {
@@ -23,14 +43,16 @@
     }
 </style>
 
-<h3>DashBoard @Frequency</h3>
+<h3>HamBus DashBoard </h3>
 <div class="wrapper">
     @foreach (var bus in BusService.BusModelList)
     {
-        <div class="mat-elevation-z7 bus-card @GetClass(bus.ActiveBus.IsActive) " OnClick="Change" style="@StyleToRender">
-            @bus.Name
-            <MatButton OnClick="Change">Change</MatButton>
-        </div>
+    <div class="bus-wrapper bus-card @GetClass(bus.ActiveBus.IsActive) " OnClick="Change" style="@StyleToRender">
+        <div class="name">Name: @bus.Name</div>
+        <div class="locked"><MatFAB Icon="lock_open"></MatFAB></div>
+        <div class="freq">Frequency: @FormatFreq() Mhz</div>
+        <div class="mode">Mode: @bus.State.Mode</div>
+    </div>
     }
 
 </div>

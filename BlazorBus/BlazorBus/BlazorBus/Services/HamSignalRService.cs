@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Text.Json;
 using System.Threading.Tasks;
 using BlazorBus.SharedModels;
 using HamBusCommonStd;
@@ -15,8 +16,8 @@ namespace BlazorBus.Services
     [Inject]
     private ActiveBusesService ActiveBuses { get; set; }
 
-    [Inject]
-    private BusStatusService BusService { get; set; }
+    //[Inject]
+    private IBusStatusService BusService { get; set; }
     #region Observables 
     public Subject<ActiveBusesModel> ActiveUpdate__ { get; set; } = new Subject<ActiveBusesModel>();
     public Subject<UiInfoPacketModel> InfoPacket__ { get; set; } = new Subject<UiInfoPacketModel>();
@@ -25,12 +26,16 @@ namespace BlazorBus.Services
     public Subject<HamBusError> SaveResults__ { get; set; } = new Subject<HamBusError>();
     #endregion
 
-    
+    JsonSerializerOptions options = new JsonSerializerOptions
+    {
+      //PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+      WriteIndented = true
+    };
 
     private HubConnection connection;
-    public HamSignalRService()
+    public HamSignalRService(IBusStatusService bs)
     {
-
+      BusService = bs; 
     }
     public async Task<HubConnection> StartService(string url)
     {
@@ -71,7 +76,11 @@ namespace BlazorBus.Services
       connection.On<HamBusError>(SignalRCommands.ErrorReport, (errorReport) => HBErrors__.OnNext(errorReport));
       connection.On<UiInfoPacketModel>(SignalRCommands.InfoPacket, (info) =>
       {
+        if (BusService == null) Console.WriteLine("bus service is null");
+        //Console.WriteLine("on SR callback" + JsonSerializer.Serialize(info, options));
+        BusService.TestMethod();
         BusService.UpdateFromInfoPacket(info);
+
         InfoPacket__.OnNext(info);
       });
       connection.On<RigState>(SignalRCommands.State, (state) =>

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HamBusCommonStd;
 
 namespace BlazorBus.Services
 {
-  public class BusStatusService
+  public class BusStatusService: IBusStatusService
   {
     public List<BusStatusModel> BusModelList { get; set; } = new List<BusStatusModel>();
     public void UpdateState(RigState state)
@@ -22,6 +20,10 @@ namespace BlazorBus.Services
       }
     }
 
+    public void TestMethod()
+    {
+      Console.WriteLine("in test method");
+    }
     public void UpdateActiveBuses(ActiveBusesModel bus)
     {
       int index = BusModelList.FindIndex(item => item.Name.Equals(bus.Name));
@@ -37,6 +39,7 @@ namespace BlazorBus.Services
     }
     public void UpdateFromInfoPacket(UiInfoPacketModel infoList)
     {
+      Console.WriteLine("in updatefrominfopacket");
       foreach(var aBus in infoList.ActiveBuses)
       {
         UpdateActiveBuses(aBus);
