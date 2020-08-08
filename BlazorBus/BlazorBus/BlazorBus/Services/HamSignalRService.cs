@@ -77,8 +77,6 @@ namespace BlazorBus.Services
       connection.On<UiInfoPacketModel>(SignalRCommands.InfoPacket, (info) =>
       {
         if (BusService == null) Console.WriteLine("bus service is null");
-        //Console.WriteLine("on SR callback" + JsonSerializer.Serialize(info, options));
-        BusService.TestMethod();
         BusService.UpdateFromInfoPacket(info);
 
         InfoPacket__.OnNext(info);

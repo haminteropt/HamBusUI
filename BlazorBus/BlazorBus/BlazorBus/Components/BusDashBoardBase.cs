@@ -59,32 +59,43 @@ namespace BlazorBus.Components
         ActiveBusServie.ActiveBuses = info.ActiveBuses;
         foreach (var active in info.ActiveBuses)
         {
+          UpdateNewState(active.State);
           Console.WriteLine($"info: {active.Name}");
         }
         StateHasChanged();
       });
 
-      SigR.ActiveUpdate__.Subscribe<ActiveBusesModel>(active =>
+      SigR.ActiveUpdate__.Subscribe(active =>
       {
-        ActiveBusServie.BusUpdate(active);
-        if (active.IsActive)
-          Console.WriteLine($"Bus {active.Name} added");
-        else
-          Console.WriteLine($"Bus {active.Name} removed");
-        StateHasChanged();
+        HandleActiveBusUpdate(active);
       });
-      SigR.RigState__.Subscribe<RigState>((state) =>
+      SigR.RigState__.Subscribe((state) =>
       {
-
-        if (this.SerialNum == state.SerialNumDym) return;
-        SerialNum = state.SerialNumDym;
-        freqLong = state.Freq;
-        Frequency = Convert.ToDecimal(freqLong) / 1000000.0m;
-        StateHasChanged();
-        //Console.WriteLine($"Frequency: {Frequency} Serial Num: {state.SerialNumDym}");
+        UpdateNewState(state);
 
       });
 
+    }
+
+    private void HandleActiveBusUpdate(ActiveBusesModel active)
+    {
+      Console.WriteLine($"active.freq: {active.State.Freq}");
+      UpdateNewState(active.State);
+      ActiveBusServie.BusUpdate(active);
+      if (active.IsActive)
+        Console.WriteLine($"Bus {active.Name} added");
+      else
+        Console.WriteLine($"Bus {active.Name} removed");
+      StateHasChanged();
+    }
+
+    private void UpdateNewState(RigState state)
+    {
+      if (this.SerialNum == state.SerialNumDym) return;
+      SerialNum = state.SerialNumDym;
+      freqLong = state.Freq;
+      Frequency = Convert.ToDecimal(freqLong) / 1000000.0m;
+      StateHasChanged();
     }
   }
 }

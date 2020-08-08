@@ -9,7 +9,7 @@ namespace BlazorBus.Services
     public List<BusStatusModel> BusModelList { get; set; } = new List<BusStatusModel>();
     public void UpdateState(RigState state)
     {
-      int index = BusModelList.FindIndex(item => item.Name.Equals(state.Name));
+      int index = BusModelList.FindIndex(item => item.Name == state.Name);
       if (index != -1)
         BusModelList[index].State = state;
       else {
@@ -33,6 +33,7 @@ namespace BlazorBus.Services
       {
         var activeBbus = new BusStatusModel();
         activeBbus.Name = bus.Name;
+        activeBbus.State = bus.State;
         activeBbus.ActiveBus = bus;
         BusModelList.Add(activeBbus);
       }
@@ -42,6 +43,7 @@ namespace BlazorBus.Services
       Console.WriteLine("in updatefrominfopacket");
       foreach(var aBus in infoList.ActiveBuses)
       {
+        Console.WriteLine($"Freq from master: {aBus.State.Freq}");
         UpdateActiveBuses(aBus);
       }
  
