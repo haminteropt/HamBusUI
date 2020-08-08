@@ -76,7 +76,6 @@ namespace BlazorBus.Services
       connection.On<HamBusError>(SignalRCommands.ErrorReport, (errorReport) => HBErrors__.OnNext(errorReport));
       connection.On<UiInfoPacketModel>(SignalRCommands.InfoPacket, (info) =>
       {
-        if (BusService == null) Console.WriteLine("bus service is null");
         BusService.UpdateFromInfoPacket(info);
 
         InfoPacket__.OnNext(info);

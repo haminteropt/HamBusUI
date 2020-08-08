@@ -12,6 +12,6 @@ namespace BlazorBus.Services
     void UpdateState(RigState state);
     void UpdateActiveBuses(ActiveBusesModel bus);
     void UpdateFromInfoPacket(UiInfoPacketModel infoList);
-    void TestMethod();
+
   }
 }

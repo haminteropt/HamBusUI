@@ -20,10 +20,6 @@ namespace BlazorBus.Services
       }
     }
 
-    public void TestMethod()
-    {
-      Console.WriteLine("in test method");
-    }
     public void UpdateActiveBuses(ActiveBusesModel bus)
     {
       int index = BusModelList.FindIndex(item => item.Name.Equals(bus.Name));
@@ -40,13 +36,10 @@ namespace BlazorBus.Services
     }
     public void UpdateFromInfoPacket(UiInfoPacketModel infoList)
     {
-      Console.WriteLine("in updatefrominfopacket");
       foreach(var aBus in infoList.ActiveBuses)
       {
-        Console.WriteLine($"Freq from master: {aBus.State.Freq}");
         UpdateActiveBuses(aBus);
       }
- 
     }
   }
 }

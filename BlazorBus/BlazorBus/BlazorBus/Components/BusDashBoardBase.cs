@@ -39,7 +39,6 @@ namespace BlazorBus.Components
     public string FormatFreq(BusStatusModel busName)
     {
       var f = busName.State.Freq/1000000m;
-      Console.WriteLine($"freq: {f}  {Frequency}");
       return f.ToString();
     }
 
@@ -60,7 +59,6 @@ namespace BlazorBus.Components
         foreach (var active in info.ActiveBuses)
         {
           UpdateNewState(active.State);
-          Console.WriteLine($"info: {active.Name}");
         }
         StateHasChanged();
       });
@@ -80,13 +78,8 @@ namespace BlazorBus.Components
 
     private void HandleActiveBusUpdate(ActiveBusesModel active)
     {
-      Console.WriteLine($"active.freq: {active.State.Freq}");
       UpdateNewState(active.State);
       ActiveBusServie.BusUpdate(active);
-      if (active.IsActive)
-        Console.WriteLine($"Bus {active.Name} added");
-      else
-        Console.WriteLine($"Bus {active.Name} removed");
       StateHasChanged();
     }
 
