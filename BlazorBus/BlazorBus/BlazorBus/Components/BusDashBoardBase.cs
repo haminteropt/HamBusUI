@@ -36,9 +36,9 @@ namespace BlazorBus.Components
       if (isActive) return activeClass;
       return inActiveClass;
     }
-    public string FormatFreq()
+    public string FormatFreq(BusStatusModel busName)
     {
-      var f = Frequency;
+      var f = busName.State.Freq/1000000m;
       Console.WriteLine($"freq: {f}  {Frequency}");
       return f.ToString();
     }
@@ -69,6 +69,7 @@ namespace BlazorBus.Components
       {
         HandleActiveBusUpdate(active);
       });
+
       SigR.RigState__.Subscribe((state) =>
       {
         UpdateNewState(state);
