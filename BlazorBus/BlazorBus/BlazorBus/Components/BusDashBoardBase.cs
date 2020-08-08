@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reactive.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using BlazorBus.Services;
 using BlazorComponentUtilities;
@@ -81,6 +82,17 @@ namespace BlazorBus.Components
       UpdateNewState(active.State);
       ActiveBusServie.BusUpdate(active);
       StateHasChanged();
+    }
+    JsonSerializerOptions options = new JsonSerializerOptions
+    {
+      //PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+      WriteIndented = true
+    };
+
+    public void LockClick(bool e, BusStatusModel bus)
+    {
+      Console.WriteLine($"name: {bus.Name} toggle: {e}");
+
     }
 
     private void UpdateNewState(RigState state)
