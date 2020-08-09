@@ -98,6 +98,10 @@ namespace BlazorBus.Components
       SigR.SetLock(lockDTO);
 
     }
+    public void SettingsClick(BusStatusModel bus)
+    {
+      Console.WriteLine($"Settings: {bus.Name}");
+    }
 
     private void UpdateNewState(RigState state)
     {

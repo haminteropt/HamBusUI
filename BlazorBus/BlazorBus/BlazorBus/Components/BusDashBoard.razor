@@ -35,14 +35,18 @@
         grid-area: mode;
     }
     .locked {
-        grid-area: locked
+        grid-area: locked;
+    }
+    .config {
+        grid-area: config;
     }
     .bus-wrapper {
         display: grid;
         grid-gap: 10px;
+        grid-template-columns: 5fr 2fr 1fr;
         grid-template-areas: 
-            "name            locked"
-            "freq            mode";
+            "name            name     locked"
+            "freq            mode     config";
     }
 
     .radio-color {
@@ -65,6 +69,9 @@
 
         <MatIconButton Class="locked icon-button" Icon="lock_open"
                        ToggleIcon="lock" ToggledChanged="((toggleState) => LockClick(toggleState, bus))"></MatIconButton>
+
+        <MatIconButton Class="config icon-button" Icon="settings" ToggleIcon="settings" 
+                        ToggledChanged="(() => SettingsClick(bus))"></MatIconButton>
 
         <div class="freq">Frequency: @FormatFreq(bus) Mhz</div>
         <div class="mode">Mode: @bus.State.Mode</div>
