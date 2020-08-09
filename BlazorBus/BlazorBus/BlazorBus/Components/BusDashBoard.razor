@@ -65,8 +65,6 @@
 
         <MatIconButton Class="locked icon-button" Icon="lock_open"
                        ToggleIcon="lock" ToggledChanged="((toggleState) => LockClick(toggleState, bus))"></MatIconButton>
-        @*<MatIconButton Class="locked icon-button" Icon="lock_open"
-                       ToggleIcon="lock" ToggledChanged="@LockClick"></MatIconButton>*@
 
         <div class="freq">Frequency: @FormatFreq(bus) Mhz</div>
         <div class="mode">Mode: @bus.State.Mode</div>

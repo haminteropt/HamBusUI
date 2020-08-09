@@ -1,4 +1,5 @@
-﻿using System.Reactive.Subjects;
+﻿using System.Collections.Generic;
+using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using BlazorBus.SharedModels;
 using HamBusCommonStd;
@@ -15,5 +16,7 @@ namespace BlazorBus.Services
     Subject<HamBusError> SaveResults__ { get; set; }
     Subject<ActiveBusesModel> ActiveUpdate__ { get; set; }
     Task<HubConnection> StartService(string url);
+    Task Login(List<string> groupList, string name);
+    Task SetLock(LockModel locker);
   }
 }

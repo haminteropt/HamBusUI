@@ -92,6 +92,10 @@ namespace BlazorBus.Components
     public void LockClick(bool e, BusStatusModel bus)
     {
       Console.WriteLine($"name: {bus.Name} toggle: {e}");
+      var lockDTO = new LockModel();
+      lockDTO.Name = bus.Name;
+      lockDTO.IsStateLocked = e;
+      SigR.SetLock(lockDTO);
 
     }
 

@@ -22,7 +22,7 @@ namespace BlazorBus.Shared
           groupList.Add("logging");
           groupList.Add("ui");
           groupList.Add("control");
-          await conn.InvokeAsync("Login", "control", groupList);
+          await SigR.Login(groupList, "control");
         }
       }
       catch (Exception e)

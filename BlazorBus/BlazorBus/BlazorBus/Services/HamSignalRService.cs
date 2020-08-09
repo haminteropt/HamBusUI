@@ -91,5 +91,17 @@ namespace BlazorBus.Services
         ActiveUpdate__.OnNext(update);
       });
     }
+
+    #region RPC
+    public async Task Login(List<string> groups, string name)
+    {
+      await connection.InvokeAsync(SignalRCommands.Login, name, groups);
+    }
+    public async Task SetLock(LockModel locker)
+    {
+      await connection.InvokeAsync(SignalRCommands.LockRig, locker);
+    }
+    #endregion
   }
+
 }
