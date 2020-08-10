@@ -7,6 +7,7 @@ using BlazorComponentUtilities;
 using HamBusCommonStd;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace BlazorBus.Components
 {
@@ -31,7 +32,13 @@ namespace BlazorBus.Components
     private long SerialNum { get; set; } = 0;
 
     protected string StyleToRender;
+    [Inject]
+    private NavigationManager navMgr { get; set; }
 
+    public BusDashBoardBase()
+    {
+
+    }
     public string GetClass(bool isActive)
     {
       if (isActive) return activeClass;
@@ -100,7 +107,7 @@ namespace BlazorBus.Components
     }
     public void SettingsClick(BusStatusModel bus)
     {
-      Console.WriteLine($"Settings: {bus.Name}");
+      navMgr.NavigateTo($"/RigSettings/{bus.Name}");
     }
 
     private void UpdateNewState(RigState state)

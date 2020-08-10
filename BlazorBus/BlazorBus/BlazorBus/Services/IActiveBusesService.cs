@@ -10,5 +10,6 @@ namespace BlazorBus.Services
   {
     List<ActiveBusesModel> ActiveBuses { get; set; }
     void BusUpdate(ActiveBusesModel bus);
+
   }
 }
