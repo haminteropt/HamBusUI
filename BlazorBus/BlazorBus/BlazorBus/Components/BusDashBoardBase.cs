@@ -62,16 +62,19 @@ namespace BlazorBus.Components
           UpdateNewState(active.State);
         }
         StateHasChanged();
+        Console.WriteLine("in info sub");
       });
 
       SigR.ActiveUpdate__.Subscribe(active =>
       {
         HandleActiveBusUpdate(active);
+        Console.WriteLine("in active sub");
       });
 
       SigR.RigState__.Subscribe((state) =>
       {
         UpdateNewState(state);
+        Console.WriteLine("in state sub");
 
       });
 

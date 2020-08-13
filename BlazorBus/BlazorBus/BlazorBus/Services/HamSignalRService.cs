@@ -76,18 +76,23 @@ namespace BlazorBus.Services
       connection.On<HamBusError>(SignalRCommands.ErrorReport, (errorReport) => HBErrors__.OnNext(errorReport));
       connection.On<UiInfoPacketModel>(SignalRCommands.InfoPacket, (info) =>
       {
+        Console.WriteLine("In on infoPacket");
         BusService.UpdateFromInfoPacket(info);
 
         InfoPacket__.OnNext(info);
       });
       connection.On<RigState>(SignalRCommands.State, (state) =>
       {
-        BusService.UpdateState(state);
+        Console.WriteLine("In on state");
+  
+          BusService.UpdateState(state);
         RigState__.OnNext(state);
       });
       connection.On<ActiveBusesModel>(SignalRCommands.ActiveUpdate, (update) =>
       {
-        BusService.UpdateActiveBuses(update);
+        Console.WriteLine("In on active update");
+  
+          BusService.UpdateActiveBuses(update);
         ActiveUpdate__.OnNext(update);
       });
     }
