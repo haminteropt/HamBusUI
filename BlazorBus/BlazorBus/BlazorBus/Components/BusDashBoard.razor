@@ -58,7 +58,7 @@
 
 <h3>HamBus DashBoard </h3>
 <div class="wrapper">
-    @foreach (var bus in BusService.BusModelList)
+    @foreach (var bus in BusService.BusStatusList)
     {
     <div class="bus-wrapper bus-card @GetClass(bus.ActiveBus.IsActive) " OnClick="Change" style="@StyleToRender">
         <div class="name">Name: @bus.Name</div>

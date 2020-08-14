@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -35,7 +34,7 @@ namespace BlazorBus.Services
     private HubConnection connection;
     public HamSignalRService(IBusStatusService bs)
     {
-      BusService = bs; 
+      BusService = bs;
     }
     public async Task<HubConnection> StartService(string url)
     {
@@ -84,15 +83,16 @@ namespace BlazorBus.Services
       connection.On<RigState>(SignalRCommands.State, (state) =>
       {
         Console.WriteLine("In on state");
-  
-          BusService.UpdateState(state);
+
+        BusService.UpdateState(state);
         RigState__.OnNext(state);
       });
+
       connection.On<ActiveBusesModel>(SignalRCommands.ActiveUpdate, (update) =>
       {
         Console.WriteLine("In on active update");
-  
-          BusService.UpdateActiveBuses(update);
+
+        BusService.UpdateActiveBuses(update);
         ActiveUpdate__.OnNext(update);
       });
     }
