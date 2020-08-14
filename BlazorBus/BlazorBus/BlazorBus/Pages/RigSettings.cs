@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using BlazorBus.Services;
 using HamBusCommonStd;
@@ -24,6 +25,14 @@ namespace BlazorBus.Pages
       var busConf = BusService.FindByName(Name);
       if (busConf == null) Console.WriteLine("busConf not found");
       else Console.WriteLine("busConf  found");
+
+      var options = new JsonSerializerOptions()
+      {
+        WriteIndented = true
+      };
+
+      var conf = JsonSerializer.Deserialize<RigConf>(busConf.Configuration);
+    Console.WriteLine("bustatus \n" +  JsonSerializer.Serialize<RigConf>(conf) );
 
     }
     public void HandleValidSubmit()
