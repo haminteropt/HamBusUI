@@ -1,11 +1,42 @@
 ﻿@page "/RigSettings/{name}"
-<h3>RigSettings @Name</h3>
+<style>
+    .page-background {
+        background-color: lightblue;
+        padding: 10px;
+    }
+</style>
+<div class="page-background">
+    <MatCard class="demo-mat-card">
+        <div class="demo-mat-card-content">
+            <MatHeadline6 class="demo-mat-card-clean-margin">
+                RigSettings @Name
+            </MatHeadline6>
+            @*<MatSubtitle2 class="demo-mat-card-clean-margin">
+                    by Kurt Wagner
+                </MatSubtitle2>*@
+        </div>
+        <MatCardContent>
 
-<!--<EditForm Model="@Config" OnValidSubmit="@HandleValidSubmit">-->
-    @*<DataAnnotationsValidator />
-    <ValidationSummary />*@
+            <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                @*<EditForm  OnValidSubmit="Success">*@
+                    @*<EditForm Model="Config" OnValidSubmit="Success">
+                        <DataAnnotationsValidator />*@
+                        <MatTextField Label="Name" Disabled="true" @bind-Value="@Config.name" />
+                    @*</EditForm>*@
+</MatBody2>
+        </MatCardContent>
+        <MatCardActions>
+            <MatCardActionButtons>
+                <MatButton>Read</MatButton>
+                <MatButton>Bookmark</MatButton>
+            </MatCardActionButtons>
 
-    <!--<InputText id="name" @bind-Value="Config.name" />
+            <MatCardActionIcons>
+                <MatIconButton Icon="@MatIconNames.Favorite"></MatIconButton>
+                <MatIconButton Icon="@MatIconNames.Dashboard"></MatIconButton>
+            </MatCardActionIcons>
+        </MatCardActions>
+    </MatCard>
+</div>
 
-    <button type="submit">Submit</button>
-</EditForm>-->
+

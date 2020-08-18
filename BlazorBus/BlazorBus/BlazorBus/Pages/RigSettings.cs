@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using BlazorBus.Services;
@@ -20,21 +18,43 @@ namespace BlazorBus.Pages
 
     public RigConf Config { get; set; }
 
+    protected override async Task OnParametersSetAsync()
+    {
+      Console.WriteLine("in onsetpar");
+      var options = new JsonSerializerOptions()
+      {
+        WriteIndented = true
+      };
+      var busConf = BusService.FindByName(Name);
+      if (busConf == null)
+      {
+        Console.WriteLine("busConf not found");
+        Config = new RigConf();
+      }
+      else {
+ 
+        Config = JsonSerializer.Deserialize<RigConf>(busConf.Configuration);
+        StateHasChanged();
+        Console.WriteLine($"busConf  found Name: {Config.name}");
+      }
+    }
+
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
-      var busConf = BusService.FindByName(Name);
-      if (busConf == null) Console.WriteLine("busConf not found");
-      else Console.WriteLine("busConf  found");
+
+      Console.WriteLine("in on after rend");
 
       var options = new JsonSerializerOptions()
       {
         WriteIndented = true
       };
 
-      var conf = JsonSerializer.Deserialize<RigConf>(busConf.Configuration);
-    Console.WriteLine("bustatus \n" +  JsonSerializer.Serialize<RigConf>(conf) );
+
+
 
     }
+    private async Task Success()
+    { }
     public void HandleValidSubmit()
     {
 
