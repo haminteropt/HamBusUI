@@ -34,6 +34,8 @@ namespace BlazorBus.Pages
       else {
  
         Config = JsonSerializer.Deserialize<RigConf>(busConf.Configuration);
+        Console.WriteLine($"busConf speed: {Config.baudRate} {Config.baudRate.GetType()}");
+        Config.dataBits = 7;
         StateHasChanged();
         Console.WriteLine($"busConf  found Name: {Config.name}");
       }

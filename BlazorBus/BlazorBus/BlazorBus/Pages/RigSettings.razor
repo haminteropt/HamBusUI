@@ -19,11 +19,59 @@
 
             <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
                 @*<EditForm  OnValidSubmit="Success">*@
-                    @*<EditForm Model="Config" OnValidSubmit="Success">
-                        <DataAnnotationsValidator />*@
-                        <MatTextField Label="Name" Disabled="true" @bind-Value="@Config.name" />
-                    @*</EditForm>*@
-</MatBody2>
+                <EditForm Model="Config" OnValidSubmit="Success">
+                    <DataAnnotationsValidator />
+                    <MatTextField Label="Name" Disabled="true" @bind-Value="@Config.name" />
+                    <MatSelect Label="Select" @bind-Value="@Config.commPortName">
+                        <MatOptionString Value=""></MatOptionString>
+                        <MatOptionString Value="COM1">COM1</MatOptionString>
+                        <MatOptionString Value="COM2">COM2</MatOptionString>
+                        <MatOptionString Value="COM3">COM3</MatOptionString>
+                        <MatOptionString Value="COM4">COM4</MatOptionString>
+                        <MatOptionString Value="COM5">COM5</MatOptionString>
+                        <MatOptionString Value="COM6">COM6</MatOptionString>
+                        <MatOptionString Value="COM7">COM7</MatOptionString>
+                        <MatOptionString Value="COM8">COM8</MatOptionString>
+                        <MatOptionString Value="COM9">COM9</MatOptionString>
+                        <MatOptionString Value="COM10">COM10</MatOptionString>
+                        <MatOptionString Value="COM11">COM11</MatOptionString>
+                        <MatOptionString Value="COM12">COM12</MatOptionString>
+                        <MatOptionString Value="COM13">COM13</MatOptionString>
+                        <MatOptionString Value="COM14">COM14</MatOptionString>
+                        <MatOptionString Value="COM15">COM15</MatOptionString>
+                        <MatOptionString Value="COM16">COM16</MatOptionString>
+                        <MatOptionString Value="COM17">COM17</MatOptionString>
+                        <MatOptionString Value="COM18">COM18</MatOptionString>
+                        <MatOptionString Value="COM19">COM19</MatOptionString>
+                        <MatOptionString Value="COM20">COM20</MatOptionString>
+
+                        <MatOptionString Value="COM21">COM21</MatOptionString>
+                        <MatOptionString Value="COM22">COM22</MatOptionString>
+                        <MatOptionString Value="COM23">COM23</MatOptionString>
+                        <MatOptionString Value="COM24">COM24</MatOptionString>
+                        <MatOptionString Value="COM25">COM25</MatOptionString>
+                        <MatOptionString Value="COM26">COM26</MatOptionString>
+                        <MatOptionString Value="COM27">COM27</MatOptionString>
+                        <MatOptionString Value="COM28">COM28</MatOptionString>
+                        <MatOptionString Value="COM29">COM29</MatOptionString>
+                    </MatSelect>
+
+                    <MatSelect Label="Select" TValue="int" @bind-Value="@Config.baudRate">
+                        <MatOptionString TValue="int" Value="1200">1200 bps</MatOptionString>
+                        <MatOptionString TValue="int" Value="2400">2400 bps</MatOptionString>
+                        <MatOptionString TValue="int" Value="4800">4800 bps</MatOptionString>
+                        <MatOptionString TValue="int" Value="9600">9600 bps</MatOptionString>
+                        <MatOptionString TValue="int" Value="19200">19,200 bps</MatOptionString>
+                        <MatOptionString TValue="int" Value="28800">28,800 bps</MatOptionString>
+                        <MatOptionString TValue="int" Value="38400">38,400 bps</MatOptionString>
+                        <MatOptionString TValue="int" Value="56000">56,000 bps</MatOptionString>
+                    </MatSelect>
+                    @*<MatSelect Label="Select"  @bind-Value="@Config.dataBits">
+                        <MatOptionString TValue="int" Value="7">7 bits</MatOptionString>
+                        <MatOptionString TValue="int" Value="8">8 bits</MatOptionString>
+                    </MatSelect>*@
+                </EditForm>
+            </MatBody2>
         </MatCardContent>
         <MatCardActions>
             <MatCardActionButtons>
