@@ -18,6 +18,8 @@ namespace BlazorBus.Pages
 
     public RigConf Config { get; set; }
 
+    public bool isNotNew { get; set; } = true;
+ 
     protected override async Task OnParametersSetAsync()
     {
       Console.WriteLine("in onsetpar");
@@ -28,11 +30,12 @@ namespace BlazorBus.Pages
       var busConf = BusService.FindByName(Name);
       if (busConf == null)
       {
+        isNotNew = false;
         Console.WriteLine("busConf not found");
         Config = new RigConf();
       }
       else {
- 
+        isNotNew = true;
         Config = JsonSerializer.Deserialize<RigConf>(busConf.Configuration);
         Console.WriteLine($"busConf speed: {Config.baudRate} {Config.baudRate.GetType()}");
         Config.dataBits = 7;

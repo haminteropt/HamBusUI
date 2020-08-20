@@ -1,4 +1,5 @@
-﻿@page "/RigSettings/{name}"
+﻿@page "/rigSettings"
+@page "/RigSettings/{name}"
 <style>
     .page-background {
         background-color: lightblue;
@@ -21,8 +22,9 @@
                 @*<EditForm  OnValidSubmit="Success">*@
                 <EditForm Model="Config" OnValidSubmit="Success">
                     <DataAnnotationsValidator />
-                    <MatTextField Label="Name" Disabled="true" @bind-Value="@Config.name" />
-                    <MatSelect Label="Select" @bind-Value="@Config.commPortName">
+                    <MatTextField Label="Name" Disabled="@isNotNew" @bind-Value="@Config.name" />
+
+                    <MatSelect Label="Comm Port" @bind-Value="@Config.commPortName">
                         <MatOptionString Value=""></MatOptionString>
                         <MatOptionString Value="COM1">COM1</MatOptionString>
                         <MatOptionString Value="COM2">COM2</MatOptionString>
@@ -44,7 +46,6 @@
                         <MatOptionString Value="COM18">COM18</MatOptionString>
                         <MatOptionString Value="COM19">COM19</MatOptionString>
                         <MatOptionString Value="COM20">COM20</MatOptionString>
-
                         <MatOptionString Value="COM21">COM21</MatOptionString>
                         <MatOptionString Value="COM22">COM22</MatOptionString>
                         <MatOptionString Value="COM23">COM23</MatOptionString>
@@ -56,21 +57,42 @@
                         <MatOptionString Value="COM29">COM29</MatOptionString>
                     </MatSelect>
 
-                    <MatSelect Label="Select" TValue="int" @bind-Value="@Config.baudRate">
-                        <MatOptionString TValue="int" Value="1200">1200 bps</MatOptionString>
-                        <MatOptionString TValue="int" Value="2400">2400 bps</MatOptionString>
-                        <MatOptionString TValue="int" Value="4800">4800 bps</MatOptionString>
-                        <MatOptionString TValue="int" Value="9600">9600 bps</MatOptionString>
-                        <MatOptionString TValue="int" Value="19200">19,200 bps</MatOptionString>
-                        <MatOptionString TValue="int" Value="28800">28,800 bps</MatOptionString>
-                        <MatOptionString TValue="int" Value="38400">38,400 bps</MatOptionString>
-                        <MatOptionString TValue="int" Value="56000">56,000 bps</MatOptionString>
+                    <MatSelect Label="Speed" TValue="int" @bind-Value="@Config.baudRate">
+                        <MatOption TValue="int" Value="1200">   1200 bps</MatOption>
+                        <MatOption TValue="int" Value="2400">   2400 bps</MatOption>
+                        <MatOption TValue="int" Value="4800">   4800 bps</MatOption>
+                        <MatOption TValue="int" Value="9600">   9600 bps</MatOption>
+                        <MatOption TValue="int" Value="19200">19,200 bps</MatOption>
+                        <MatOption TValue="int" Value="28800">28,800 bps</MatOption>
+                        <MatOption TValue="int" Value="38400">38,400 bps</MatOption>
+                        <MatOption TValue="int" Value="56000">56,000 bps</MatOption>
                     </MatSelect>
-                    @*<MatSelect Label="Select"  @bind-Value="@Config.dataBits">
-                        <MatOptionString TValue="int" Value="7">7 bits</MatOptionString>
-                        <MatOptionString TValue="int" Value="8">8 bits</MatOptionString>
-                    </MatSelect>*@
+
+                    <MatSelect Label="Data bits" @bind-Value="@Config.dataBits">
+                        <MatOption TValue="int" Value="7">7 bits</MatOption>
+                        <MatOption TValue="int" Value="8">8 bits</MatOption>
+                    </MatSelect>
+
+                    <MatSelect Label="Stop Bit" @bind-Value="@Config.stopBits">
+                        <MatOptionString Value="one">1 stop bits</MatOptionString>
+                        <MatOptionString Value="two">2 stop bits</MatOptionString>
+                    </MatSelect>
+
+                    <MatSelect Label="Parity" @bind-Value="@Config.parity">
+                        <MatOptionString Value="odd">Odd</MatOptionString>
+                        <MatOptionString Value="even">Even</MatOptionString>
+                        <MatOptionString Value="none">None</MatOptionString>
+                    </MatSelect>
+
+                    <MatSelect Label="Hand Shake" @bind-Value="@Config.handshake">
+                        <MatOptionString Value="none">None</MatOptionString>
+                        <MatOptionString Value="rts">RTS</MatOptionString>
+                        <MatOptionString Value="dtr">DTR</MatOptionString>
+                        <MatOptionString Value="both">Both</MatOptionString>
+                    </MatSelect>
+
                 </EditForm>
+
             </MatBody2>
         </MatCardContent>
         <MatCardActions>
