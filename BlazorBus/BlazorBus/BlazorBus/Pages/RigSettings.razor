@@ -96,14 +96,12 @@
             </MatBody2>
         </MatCardContent>
         <MatCardActions>
-            <MatCardActionButtons>
-                <MatButton>Read</MatButton>
-                <MatButton>Bookmark</MatButton>
-            </MatCardActionButtons>
+
 
             <MatCardActionIcons>
-                <MatIconButton Icon="@MatIconNames.Favorite"></MatIconButton>
-                <MatIconButton Icon="@MatIconNames.Dashboard"></MatIconButton>
+                <MatIconButton Icon="@MatIconNames.Cancel" OnClick="@HomeClick"></MatIconButton>
+                <MatIconButton Icon="@MatIconNames.Save"  OnClick="@SaveClick"></MatIconButton>
+                <MatIconButton Icon="@MatIconNames.Home" OnClick="@HomeClick"></MatIconButton>
             </MatCardActionIcons>
         </MatCardActions>
     </MatCard>

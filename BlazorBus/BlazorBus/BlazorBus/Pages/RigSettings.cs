@@ -13,6 +13,8 @@ namespace BlazorBus.Pages
     public IActiveBusesService ActiveBusServie { get; set; }
     [Inject]
     public IBusStatusService BusService { get; set; }
+    [Inject]
+    private NavigationManager navMgr { get; set; }
     [Parameter]
     public string Name { get; set; }
 
@@ -63,6 +65,18 @@ namespace BlazorBus.Pages
     public void HandleValidSubmit()
     {
 
+    }
+    public void CancelClick()
+    {
+      Console.WriteLine("Cancel");
+    }
+    public void SaveClick()
+    {
+      Console.WriteLine("Save");
+    }
+    public void HomeClick()
+    {
+      navMgr.NavigateTo($"/");
     }
   }
 }
