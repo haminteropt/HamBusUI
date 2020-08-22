@@ -1,5 +1,6 @@
 ﻿@page "/rigSettings"
 @page "/RigSettings/{name}"
+@using System.ComponentModel.DataAnnotations
 <style>
     .page-background {
         background-color: lightblue;
@@ -28,8 +29,8 @@
                         Field-level Validation Messages
                     </div>
                     <div>
-                        <MatTextField Label="Name" Disabled="@isNotNew" @bind-Value="@Config.name" />
-                        <ValidationMessage For="@(()=> @Config.name)" />
+                        <MatTextField Label="Name" Disabled="@isNotNew" @bind-Value="Config.name" />
+                        <ValidationMessage For="@(()=> Config.name)" />
 
                         <MatSelect Label="Comm Port" @bind-Value="@Config.commPortName">
                             <MatOptionString Value=""></MatOptionString>
