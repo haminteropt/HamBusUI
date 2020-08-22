@@ -6,7 +6,7 @@ namespace BlazorBus.Services
 {
   public class BusStatusService: IBusStatusService
   {
-    public List<BusStatusModel> BusModelList { get; set; } = new List<BusStatusModel>();
+    public List<BusStatusModel> BusStatusList { get; set; } = new List<BusStatusModel>();
     public List<BusConfigurationDB> BusDbConfig { get; set; } = new List<BusConfigurationDB>();
     public void UpdateState(RigState state)
     {

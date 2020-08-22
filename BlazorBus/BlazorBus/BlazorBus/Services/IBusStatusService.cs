@@ -8,7 +8,7 @@ namespace BlazorBus.Services
 {
   public interface IBusStatusService
   {
-    List<BusStatusModel> BusModelList { get; set; }
+    List<BusStatusModel> BusStatusList { get; set; }
     public List<BusConfigurationDB> BusDbConfig { get; set; }
     void UpdateState(RigState state);
     void UpdateActiveBuses(ActiveBusesModel bus);
