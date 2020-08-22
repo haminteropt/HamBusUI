@@ -71,7 +71,7 @@
             <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
                 <p>
                     <MatTextField Label="Username" @bind-Value="myModel.Username" />
-                    <ValidationMessage For="@(() => myModel.Username)" />
+                    <ValidationMessage For="@(() => @myModel.Username)" />
                 </p>
                 <p>
                     <MatTextField Label="Password" @bind-Value="myModel.Password" Type="password" />

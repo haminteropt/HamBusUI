@@ -47,6 +47,11 @@ namespace BlazorBus.Pages
     public DRigConf Config { get; set; }
 
     public bool isNotNew { get; set; } = true;
+
+    public RigSettings()
+    {
+      Config = new DRigConf();
+    }
  
     protected override async Task OnParametersSetAsync()
     {
@@ -82,7 +87,7 @@ namespace BlazorBus.Pages
         WriteIndented = true
       };
     }
-    private async Task Success()
+    public async Task Success()
     {
       await JS.InvokeAsync<object>("alert", "Successful login!");
     }
