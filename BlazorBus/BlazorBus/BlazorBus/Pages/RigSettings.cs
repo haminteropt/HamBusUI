@@ -1,14 +1,40 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using System.Threading.Tasks;
 using BlazorBus.Services;
 using HamBusCommonStd;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace BlazorBus.Pages
 {
+  public class DRigConf : BusConfigBase
+  {
+    public DRigConf() { }
+
+    [Required]
+    public string name { get; set; }
+    [Required]
+    public string commPortName { get; set; }
+    [Required]
+    public int baudRate { get; set; } = 9600;
+    [Required]
+    public string parity { get; set; } = "";
+    [Required]
+    public int dataBits { get; set; } = 8;
+    [Required]
+    public string stopBits { get; set; } = "";
+    // TODO do string handshake codes
+    [Required]
+    public string handshake { get; set; } = "none";
+    public int? readTimeout { get; set; }
+    public int? writeTimeout { get; set; } = null;
+  }
   public partial class RigSettings
   {
+    [Inject]
+    IJSRuntime JS { get; set; }
     [Inject]
     public IActiveBusesService ActiveBusServie { get; set; }
     [Inject]
@@ -18,7 +44,7 @@ namespace BlazorBus.Pages
     [Parameter]
     public string Name { get; set; }
 
-    public RigConf Config { get; set; }
+    public DRigConf Config { get; set; }
 
     public bool isNotNew { get; set; } = true;
  
@@ -34,11 +60,11 @@ namespace BlazorBus.Pages
       {
         isNotNew = false;
         Console.WriteLine("busConf not found");
-        Config = new RigConf();
+        Config = new DRigConf();
       }
       else {
         isNotNew = true;
-        Config = JsonSerializer.Deserialize<RigConf>(busConf.Configuration);
+        Config = JsonSerializer.Deserialize<DRigConf>(busConf.Configuration);
         Console.WriteLine($"busConf speed: {Config.baudRate} {Config.baudRate.GetType()}");
         Config.dataBits = 7;
         StateHasChanged();
@@ -55,13 +81,11 @@ namespace BlazorBus.Pages
       {
         WriteIndented = true
       };
-
-
-
-
     }
     private async Task Success()
-    { }
+    {
+      await JS.InvokeAsync<object>("alert", "Successful login!");
+    }
     public void HandleValidSubmit()
     {
 
