@@ -1,45 +1,27 @@
 ﻿@page "/rigSettings"
 @using System.ComponentModel.DataAnnotations
-<style>
-    .page-background {
-        background-color: lightblue;
-        padding: 10px;
-    }
-</style>
+
 <div class="page-background">
-    <MatCard class="demo-mat-card">
 
-        <MatCardContent>
-
-            <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-
-                <EditForm Model="Config" OnValidSubmit="Success">
-                    <DataAnnotationsValidator />
-                    <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
-                        Summary-level Validation Messages
-                    </div>
-                    <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
-                    </div>
-                    <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
-                        Field-level Validation Messages
-                    </div>
-                    <div>
-                        <MatTextField Label="Name"  @bind-Value="Config.name" />
-                        <ValidationMessage For="@(()=> Config.name)" />
-                    </div>
-                </EditForm>
-
-            </MatBody2>
-        </MatCardContent>
-        <MatCardActions>
+    <EditForm Model="Config" OnValidSubmit="Success">
+        <DataAnnotationsValidator />
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
+            Summary-level Validation Messages
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
+        </div>
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
+            Field-level Validation Messages
+        </div>
+        <div>
+            <MatTextField Label="Name" @bind-Value="Config.name" />
+            <ValidationMessage For="@(()=> Config.name)" />
+        </div>
+        <MatButton Type="submit" Raised="true">Login</MatButton>
+    </EditForm>
 
 
-            <MatCardActionIcons>
-                <MatButton Type="submit" Raised="true">Login</MatButton>
 
-            </MatCardActionIcons>
-        </MatCardActions>
-    </MatCard>
 </div>
 
 
