@@ -31,7 +31,13 @@ namespace BlazorBus.Components
     private long SerialNum { get; set; } = 0;
 
     protected string StyleToRender;
+    [Inject]
+    private NavigationManager navMgr { get; set; }
 
+    public BusDashBoardBase()
+    {
+
+    }
     public string GetClass(bool isActive)
     {
       if (isActive) return activeClass;
@@ -100,6 +106,10 @@ namespace BlazorBus.Components
       lockDTO.IsStateLocked = e;
       SigR.SetLock(lockDTO);
 
+    }
+    public void SettingsClick(BusStatusModel bus)
+    {
+      navMgr.NavigateTo($"/RigSettings/{bus.Name}");
     }
 
     private void UpdateNewState(RigState state)
