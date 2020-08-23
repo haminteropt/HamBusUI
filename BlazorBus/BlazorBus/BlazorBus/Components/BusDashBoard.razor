@@ -6,56 +6,63 @@
         padding: 3px;
         margin: 5px;
     }
+
     .icon-size {
-        max-height:7px;
+        max-height: 7px;
         max-width: 7px;
     }
-    .icon-button {
-        padding: 0px;
-        display: grid;
+
+    .icon-buttons {
+        grid-area: icon-buttons
+    }
+    .bld {
+        font-weight: bold;
     }
     i {
         font-size: 40px;
         align-self: center;
     }
 
-    
+
     .wrapper {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(420px,1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
         grid-auto-rows: 150px;
-
     }
+
     .name {
         grid-area: name;
     }
+
     .freq {
         grid-area: freq;
     }
+
     .mode {
         grid-area: mode;
     }
-    .locked {
+
+    .icon {
         grid-area: locked;
     }
-    .config {
-        grid-area: config;
-    }
+
     .bus-wrapper {
         display: grid;
         grid-gap: 10px;
-        grid-template-columns: 5fr 2fr 1fr;
-        grid-template-areas: 
-            "name            name     locked"
-            "freq            mode     config";
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "name            name " 
+                             "freq            mode"
+                             "icon-buttons    icon-buttons";
     }
 
     .radio-color {
         background-color: red;
     }
+
     .active {
         background-color: lightgreen;
     }
+
     .inActive {
         background-color: orangered;
     }
@@ -65,18 +72,19 @@
 <div class="wrapper">
     @foreach (var bus in BusService.BusStatusList)
     {
-    <div class="bus-wrapper bus-card @GetClass(bus.ActiveBus.IsActive)" style="@StyleToRender">
-        <div class="name">Name: @bus.Name</div>
+        <div class="bus-wrapper bus-card @GetClass(bus.ActiveBus.IsActive)" style="@StyleToRender">
+            <div class="name">Name: @bus.Name</div>
+            <div class="icon-buttons">
+                <MatIconButton Class="locked icon-button" Icon="lock_open"
+                               ToggleIcon="lock" ToggledChanged="((toggleState) => LockClick(toggleState, bus))"></MatIconButton>
 
-        <MatIconButton Class="locked icon-button" Icon="lock_open"
-                       ToggleIcon="lock" ToggledChanged="((toggleState) => LockClick(toggleState, bus))"></MatIconButton>
+                <MatIconButton Class="config icon-button" Icon="settings" ToggleIcon="settings"
+                               ToggledChanged="(() => SettingsClick(bus))"></MatIconButton>
+            </div>
+            <div class="freq"><div class="bld">Freq: </div>@FormatFreq(bus) MHz</div>
+            <div class="mode"><div class="bld">Mode: </div> @bus.State.Mode</div>
 
-        <MatIconButton Class="config icon-button" Icon="settings" ToggleIcon="settings" 
-                        ToggledChanged="(() => SettingsClick(bus))"></MatIconButton>
-
-        <div class="freq">Freq: @FormatFreq(bus) MHz</div>
-        <div class="mode">Mode: @bus.State.Mode</div>
-    </div>
+        </div>
     }
 
 </div>

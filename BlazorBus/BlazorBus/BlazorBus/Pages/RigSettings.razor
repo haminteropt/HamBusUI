@@ -65,35 +65,42 @@
                             <MatOption TValue="int" Value="38400">38,400 bps</MatOption>
                             <MatOption TValue="int" Value="56000">56,000 bps</MatOption>
                         </MatSelect>
+                        <ValidationMessage For="@(()=> Config.baudRate)" />
 
                         <MatSelect Label="Data bits" @bind-Value="@Config.dataBits">
                             <MatOption TValue="int" Value="7">7 bits</MatOption>
                             <MatOption TValue="int" Value="8">8 bits</MatOption>
                         </MatSelect>
+                        <ValidationMessage For="@(()=> Config.dataBits)" />
 
                         <MatSelect Label="Stop Bit" @bind-Value="@Config.stopBits">
                             <MatOptionString Value="one">1 stop bits</MatOptionString>
                             <MatOptionString Value="two">2 stop bits</MatOptionString>
                         </MatSelect>
+                        <ValidationMessage For="@(()=> Config.stopBits)" />
 
                         <MatSelect Label="Parity" @bind-Value="@Config.parity">
+                            <MatOptionString TValue="string" Value=""></MatOptionString>
                             <MatOptionString Value="odd">Odd</MatOptionString>
                             <MatOptionString Value="even">Even</MatOptionString>
                             <MatOptionString Value="none">None</MatOptionString>
                         </MatSelect>
+                        <ValidationMessage For="@(()=> Config.parity)" />
 
                         <MatSelect Label="Hand Shake" @bind-Value="@Config.handshake">
+                            <MatOptionString TValue="string" Value=""></MatOptionString>
                             <MatOptionString Value="none">None</MatOptionString>
                             <MatOptionString Value="rts">RTS</MatOptionString>
                             <MatOptionString Value="dtr">DTR</MatOptionString>
                             <MatOptionString Value="both">Both</MatOptionString>
                         </MatSelect>
+                        <ValidationMessage For="@(()=> Config.handshake)" />
                     </div>
                 </MatBody2>
             </MatCardContent>
             <MatCardActions>
                 <MatCardActionIcons>
-                    <MatButton Type="submit" Raised="true">Login</MatButton>
+                    <MatButton Type="submit" Raised="true">Save</MatButton>
                     <MatIconButton Icon="@MatIconNames.Cancel" OnClick="@HomeClick"></MatIconButton>
                     <MatIconButton Icon="@MatIconNames.Save" OnClick="@SaveClick"></MatIconButton>
                     <MatIconButton Icon="@MatIconNames.Home" OnClick="@HomeClick"></MatIconButton>
