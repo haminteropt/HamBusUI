@@ -1,112 +1,189 @@
 ﻿@page "/rigSettings"
 @page "/RigSettings/{name}"
 @using System.ComponentModel.DataAnnotations
+@using HamBusCommonStd
 <style>
+    .radio-box {
+        background-color: lightpink;
+    }
+
     .page-background {
         background-color: lightblue;
         padding: 10px;
     }
+
+    .bus-type {
+        grid-area: bus-type;
+    }
+
+    .bus-form {
+        grid-area: bus-form;
+    }
+
+    .over-view {
+        display: grid;
+        grid-template-areas: "bus-type" "bus-form";
+    }
+
+    .name {
+        grid-area: name;
+    }
+
+    .port {
+        grid-area: port;
+    }
+
+    .speed {
+        grid-area: speed;
+    }
+
+    .data-bits {
+        grid-area: data-bits;
+    }
+
+    .stop-bits {
+        grid-area: stop-bits;
+    }
+
+    .parity {
+        grid-area: parity;
+    }
+
+    .handshake {
+        grid-area: handshake;
+    }
+
+    .comm-wrapper {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-areas: "name        name    ." "port        speed   data-bits" "stop-bits   parity  handshake"
+    }
 </style>
 <div class="page-background">
-    <EditForm Model="@Config" OnValidSubmit="Success">
+    <EditForm EditContext="@EC">
+        @*<EditForm Model="@Config" OnValidSubmit="Success">*@
         <DataAnnotationsValidator />
-        <MatCard class="demo-mat-card">
-            <div class="demo-mat-card-content">
-                <MatHeadline6 class="demo-mat-card-clean-margin">
-                    RigSettings @Name
-                </MatHeadline6>
+        <div class="over-view">
+            <div class="bus-type">
+                <MatH5>Type of Bus</MatH5>
+                <MatRadioGroup @bind-Value="@RigType" TValue="BusType">
+                    @*<MatRadioButton Value="@string.Empty" TValue="string">Default</MatRadioButton>*@
+                    <MatRadioButton Value="@BusType.RigBus" Label="Rig Bus" TValue="BusType"></MatRadioButton>
+                    <MatRadioButton Value="@BusType.VirtualRigBus" Label="Virtual Rig Bus" TValue="BusType"></MatRadioButton>
+                    <MatRadioButton Value="@BusType.LogBus" Label="Logging Bus" TValue="BusType"></MatRadioButton>
+                </MatRadioGroup>
             </div>
-            <MatCardContent>
-                <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-                    <div>
-                        <MatTextField Label="Name" Disabled="@isNotNew" @bind-Value="@Config.name" />
-                        <ValidationMessage For="@(()=> Config.name)" />
+            <MatCard class="bus-form">
+                <div class="">
+                    <MatHeadline6 class="">
+                        RigSettings @Name
+                    </MatHeadline6>
+                </div>
+                <MatCardContent>
+                    <MatBody2 class="">
+                        <div class="comm-wrapper">
+                            <div class="name">
+                                <MatTextField Label="Name" Disabled="@isNotNew" @bind-Value="@Config.name" />
+                                <ValidationMessage For="@(()=> Config.name)" />
+                            </div>
+                            <div class="port">
+                                <MatSelect Label="Comm Port" @bind-Value="@Config.commPortName">
+                                    <MatOptionString Value=""></MatOptionString>
+                                    <MatOptionString Value="COM1">COM1</MatOptionString>
+                                    <MatOptionString Value="COM2">COM2</MatOptionString>
+                                    <MatOptionString Value="COM3">COM3</MatOptionString>
+                                    <MatOptionString Value="COM4">COM4</MatOptionString>
+                                    <MatOptionString Value="COM5">COM5</MatOptionString>
+                                    <MatOptionString Value="COM6">COM6</MatOptionString>
+                                    <MatOptionString Value="COM7">COM7</MatOptionString>
+                                    <MatOptionString Value="COM8">COM8</MatOptionString>
+                                    <MatOptionString Value="COM9">COM9</MatOptionString>
+                                    <MatOptionString Value="COM10">COM10</MatOptionString>
+                                    <MatOptionString Value="COM11">COM11</MatOptionString>
+                                    <MatOptionString Value="COM12">COM12</MatOptionString>
+                                    <MatOptionString Value="COM13">COM13</MatOptionString>
+                                    <MatOptionString Value="COM14">COM14</MatOptionString>
+                                    <MatOptionString Value="COM15">COM15</MatOptionString>
+                                    <MatOptionString Value="COM16">COM16</MatOptionString>
+                                    <MatOptionString Value="COM17">COM17</MatOptionString>
+                                    <MatOptionString Value="COM18">COM18</MatOptionString>
+                                    <MatOptionString Value="COM19">COM19</MatOptionString>
+                                    <MatOptionString Value="COM20">COM20</MatOptionString>
+                                    <MatOptionString Value="COM21">COM21</MatOptionString>
+                                    <MatOptionString Value="COM22">COM22</MatOptionString>
+                                    <MatOptionString Value="COM23">COM23</MatOptionString>
+                                    <MatOptionString Value="COM24">COM24</MatOptionString>
+                                    <MatOptionString Value="COM25">COM25</MatOptionString>
+                                    <MatOptionString Value="COM26">COM26</MatOptionString>
+                                    <MatOptionString Value="COM27">COM27</MatOptionString>
+                                    <MatOptionString Value="COM28">COM28</MatOptionString>
+                                    <MatOptionString Value="COM29">COM29</MatOptionString>
+                                </MatSelect>
+                                <ValidationMessage For="@(() => Config.commPortName)" />
+                            </div>
+                            <div class="speed">
+                                <MatSelect Label="Speed" TValue="int" @bind-Value="@Config.baudRate">
+                                    <MatOption TValue="int" Value="1200">   1200 bps</MatOption>
+                                    <MatOption TValue="int" Value="2400">   2400 bps</MatOption>
+                                    <MatOption TValue="int" Value="4800">   4800 bps</MatOption>
+                                    <MatOption TValue="int" Value="9600">   9600 bps</MatOption>
+                                    <MatOption TValue="int" Value="19200">19,200 bps</MatOption>
+                                    <MatOption TValue="int" Value="28800">28,800 bps</MatOption>
+                                    <MatOption TValue="int" Value="38400">38,400 bps</MatOption>
+                                    <MatOption TValue="int" Value="56000">56,000 bps</MatOption>
+                                </MatSelect>
+                                <ValidationMessage For="@(()=> Config.baudRate)" />
+                            </div>
 
-                        <MatSelect Label="Comm Port" @bind-Value="@Config.commPortName">
-                            <MatOptionString Value=""></MatOptionString>
-                            <MatOptionString Value="COM1">COM1</MatOptionString>
-                            <MatOptionString Value="COM2">COM2</MatOptionString>
-                            <MatOptionString Value="COM3">COM3</MatOptionString>
-                            <MatOptionString Value="COM4">COM4</MatOptionString>
-                            <MatOptionString Value="COM5">COM5</MatOptionString>
-                            <MatOptionString Value="COM6">COM6</MatOptionString>
-                            <MatOptionString Value="COM7">COM7</MatOptionString>
-                            <MatOptionString Value="COM8">COM8</MatOptionString>
-                            <MatOptionString Value="COM9">COM9</MatOptionString>
-                            <MatOptionString Value="COM10">COM10</MatOptionString>
-                            <MatOptionString Value="COM11">COM11</MatOptionString>
-                            <MatOptionString Value="COM12">COM12</MatOptionString>
-                            <MatOptionString Value="COM13">COM13</MatOptionString>
-                            <MatOptionString Value="COM14">COM14</MatOptionString>
-                            <MatOptionString Value="COM15">COM15</MatOptionString>
-                            <MatOptionString Value="COM16">COM16</MatOptionString>
-                            <MatOptionString Value="COM17">COM17</MatOptionString>
-                            <MatOptionString Value="COM18">COM18</MatOptionString>
-                            <MatOptionString Value="COM19">COM19</MatOptionString>
-                            <MatOptionString Value="COM20">COM20</MatOptionString>
-                            <MatOptionString Value="COM21">COM21</MatOptionString>
-                            <MatOptionString Value="COM22">COM22</MatOptionString>
-                            <MatOptionString Value="COM23">COM23</MatOptionString>
-                            <MatOptionString Value="COM24">COM24</MatOptionString>
-                            <MatOptionString Value="COM25">COM25</MatOptionString>
-                            <MatOptionString Value="COM26">COM26</MatOptionString>
-                            <MatOptionString Value="COM27">COM27</MatOptionString>
-                            <MatOptionString Value="COM28">COM28</MatOptionString>
-                            <MatOptionString Value="COM29">COM29</MatOptionString>
-                        </MatSelect>
-                        <ValidationMessage For="@(() => Config.commPortName)" />
-                        <MatSelect Label="Speed" TValue="int" @bind-Value="@Config.baudRate">
-                            <MatOption TValue="int" Value="1200">   1200 bps</MatOption>
-                            <MatOption TValue="int" Value="2400">   2400 bps</MatOption>
-                            <MatOption TValue="int" Value="4800">   4800 bps</MatOption>
-                            <MatOption TValue="int" Value="9600">   9600 bps</MatOption>
-                            <MatOption TValue="int" Value="19200">19,200 bps</MatOption>
-                            <MatOption TValue="int" Value="28800">28,800 bps</MatOption>
-                            <MatOption TValue="int" Value="38400">38,400 bps</MatOption>
-                            <MatOption TValue="int" Value="56000">56,000 bps</MatOption>
-                        </MatSelect>
-                        <ValidationMessage For="@(()=> Config.baudRate)" />
+                            <div class="data-bits">
+                                <MatSelect Label="Data bits" @bind-Value="@Config.dataBits">
+                                    <MatOption TValue="int" Value="7">7 bits</MatOption>
+                                    <MatOption TValue="int" Value="8">8 bits</MatOption>
+                                </MatSelect>
+                                <ValidationMessage For="@(()=> Config.dataBits)" />
+                            </div>
 
-                        <MatSelect Label="Data bits" @bind-Value="@Config.dataBits">
-                            <MatOption TValue="int" Value="7">7 bits</MatOption>
-                            <MatOption TValue="int" Value="8">8 bits</MatOption>
-                        </MatSelect>
-                        <ValidationMessage For="@(()=> Config.dataBits)" />
+                            <div class="stop-bits">
+                                <MatSelect Label="Stop Bit" @bind-Value="@Config.stopBits">
+                                    <MatOptionString Value="one">1 stop bits</MatOptionString>
+                                    <MatOptionString Value="two">2 stop bits</MatOptionString>
+                                </MatSelect>
+                                <ValidationMessage For="@(()=> Config.stopBits)" />
+                            </div>
 
-                        <MatSelect Label="Stop Bit" @bind-Value="@Config.stopBits">
-                            <MatOptionString Value="one">1 stop bits</MatOptionString>
-                            <MatOptionString Value="two">2 stop bits</MatOptionString>
-                        </MatSelect>
-                        <ValidationMessage For="@(()=> Config.stopBits)" />
+                            <div class="parity">
+                                <MatSelect Label="Parity" @bind-Value="@Config.parity">
+                                    <MatOptionString TValue="string" Value=""></MatOptionString>
+                                    <MatOptionString Value="odd">Odd</MatOptionString>
+                                    <MatOptionString Value="even">Even</MatOptionString>
+                                    <MatOptionString Value="none">None</MatOptionString>
+                                </MatSelect>
+                                <ValidationMessage For="@(()=> Config.parity)" />
+                            </div>
 
-                        <MatSelect Label="Parity" @bind-Value="@Config.parity">
-                            <MatOptionString TValue="string" Value=""></MatOptionString>
-                            <MatOptionString Value="odd">Odd</MatOptionString>
-                            <MatOptionString Value="even">Even</MatOptionString>
-                            <MatOptionString Value="none">None</MatOptionString>
-                        </MatSelect>
-                        <ValidationMessage For="@(()=> Config.parity)" />
-
-                        <MatSelect Label="Hand Shake" @bind-Value="@Config.handshake">
-                            <MatOptionString TValue="string" Value=""></MatOptionString>
-                            <MatOptionString Value="none">None</MatOptionString>
-                            <MatOptionString Value="rts">RTS</MatOptionString>
-                            <MatOptionString Value="dtr">DTR</MatOptionString>
-                            <MatOptionString Value="both">Both</MatOptionString>
-                        </MatSelect>
-                        <ValidationMessage For="@(()=> Config.handshake)" />
-                    </div>
-                </MatBody2>
-            </MatCardContent>
-            <MatCardActions>
-                <MatCardActionIcons>
-                    <MatButton Type="submit" Raised="true">Save</MatButton>
-                    <MatIconButton Icon="@MatIconNames.Cancel" OnClick="@HomeClick"></MatIconButton>
-                    <MatIconButton Icon="@MatIconNames.Save" OnClick="@SaveClick"></MatIconButton>
-                    <MatIconButton Icon="@MatIconNames.Home" OnClick="@HomeClick"></MatIconButton>
-                </MatCardActionIcons>
-            </MatCardActions>
-        </MatCard>
+                            <div class="handshake">
+                                <MatSelect Label="Hand Shake" @bind-Value="@Config.handshake">
+                                    <MatOptionString TValue="string" Value=""></MatOptionString>
+                                    <MatOptionString Value="none">None</MatOptionString>
+                                    <MatOptionString Value="rts">RTS</MatOptionString>
+                                    <MatOptionString Value="dtr">DTR</MatOptionString>
+                                    <MatOptionString Value="both">Both</MatOptionString>
+                                </MatSelect>
+                                <ValidationMessage For="@(()=> Config.handshake)" />
+                            </div>
+                        </div>
+                    </MatBody2>
+                </MatCardContent>
+                <MatCardActions>
+                    <MatCardActionIcons>
+                        <MatButton Type="submit" Raised="true">Save</MatButton>
+                        <MatIconButton Icon="@MatIconNames.Cancel" OnClick="@HomeClick"></MatIconButton>
+                        <MatIconButton Icon="@MatIconNames.Save" OnClick="@SaveClick"></MatIconButton>
+                        <MatIconButton Icon="@MatIconNames.Home" OnClick="@HomeClick"></MatIconButton>
+                    </MatCardActionIcons>
+                </MatCardActions>
+            </MatCard>
+        </div>
     </EditForm>
 </div>
 

@@ -4,7 +4,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using BlazorBus.Services;
 using HamBusCommonStd;
+using MatBlazor;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 
 namespace BlazorBus.Pages
@@ -26,12 +28,18 @@ namespace BlazorBus.Pages
     public RigConf Config { get; set; }
 
     public bool isNotNew { get; set; } = true;
-
+    private EditContext EC { get; set; }
+    public BusType RigType { get; set; }
+    // Methods
     public RigSettings()
     {
       Config = new RigConf();
     }
- 
+    protected override void OnInitialized()
+    {
+      EC = new EditContext(Config);
+      base.OnInitialized();
+    }
     protected override async Task OnParametersSetAsync()
     {
       Console.WriteLine("in onsetpar");
@@ -72,7 +80,7 @@ namespace BlazorBus.Pages
     }
     public void HandleValidSubmit()
     {
-
+      EC.Validate();
     }
     public void CancelClick()
     {
@@ -80,6 +88,7 @@ namespace BlazorBus.Pages
     }
     public void SaveClick()
     {
+      EC.Validate();
       Console.WriteLine("Save");
     }
     public void HomeClick()
