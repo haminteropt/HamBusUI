@@ -8,26 +8,16 @@
     }
 </style>
 <div class="page-background">
-    <MatCard class="demo-mat-card">
-        <div class="demo-mat-card-content">
-            <MatHeadline6 class="demo-mat-card-clean-margin">
-                RigSettings @Name
-            </MatHeadline6>
-        </div>
-        <MatCardContent>
-
-            <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-
-                <EditForm Model="@Config" OnValidSubmit="Success">
-                    <DataAnnotationsValidator />
-                    <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
-                        Summary-level Validation Messages
-                    </div>
-                    <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
-                    </div>
-                    <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
-                        Field-level Validation Messages
-                    </div>
+    <EditForm Model="@Config" OnValidSubmit="Success">
+        <DataAnnotationsValidator />
+        <MatCard class="demo-mat-card">
+            <div class="demo-mat-card-content">
+                <MatHeadline6 class="demo-mat-card-clean-margin">
+                    RigSettings @Name
+                </MatHeadline6>
+            </div>
+            <MatCardContent>
+                <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
                     <div>
                         <MatTextField Label="Name" Disabled="@isNotNew" @bind-Value="@Config.name" />
                         <ValidationMessage For="@(()=> Config.name)" />
@@ -99,22 +89,18 @@
                             <MatOptionString Value="both">Both</MatOptionString>
                         </MatSelect>
                     </div>
-
-                </EditForm>
-
-            </MatBody2>
-        </MatCardContent>
-        <MatCardActions>
-
-
-            <MatCardActionIcons>
-                <MatButton Type="submit" Raised="true">Login</MatButton>
-                <MatIconButton Icon="@MatIconNames.Cancel" OnClick="@HomeClick"></MatIconButton>
-                <MatIconButton Icon="@MatIconNames.Save" OnClick="@SaveClick"></MatIconButton>
-                <MatIconButton Icon="@MatIconNames.Home" OnClick="@HomeClick"></MatIconButton>
-            </MatCardActionIcons>
-        </MatCardActions>
-    </MatCard>
+                </MatBody2>
+            </MatCardContent>
+            <MatCardActions>
+                <MatCardActionIcons>
+                    <MatButton Type="submit" Raised="true">Login</MatButton>
+                    <MatIconButton Icon="@MatIconNames.Cancel" OnClick="@HomeClick"></MatIconButton>
+                    <MatIconButton Icon="@MatIconNames.Save" OnClick="@SaveClick"></MatIconButton>
+                    <MatIconButton Icon="@MatIconNames.Home" OnClick="@HomeClick"></MatIconButton>
+                </MatCardActionIcons>
+            </MatCardActions>
+        </MatCard>
+    </EditForm>
 </div>
 
 
