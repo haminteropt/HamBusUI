@@ -60,8 +60,9 @@
     }
 </style>
 <div class="page-background">
-    <EditForm EditContext="@EC">
-        @*<EditForm Model="@Config" OnValidSubmit="Success">*@
+    @*<EditForm Model="@Config" OnValidSubmit="Success">*@
+    <EditForm EditContext="@EC" OnSubmit="SaveClick">
+
         <DataAnnotationsValidator />
         <div class="over-view">
             <div class="bus-type">
@@ -73,6 +74,7 @@
                     <MatRadioButton Value="@BusType.LogBus" Label="Logging Bus" TValue="BusType"></MatRadioButton>
                 </MatRadioGroup>
             </div>
+            <div><ValidationSummary/></div>
             <MatCard class="bus-form">
                 <div class="">
                     <MatHeadline6 class="">

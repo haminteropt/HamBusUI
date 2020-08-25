@@ -28,7 +28,7 @@ namespace BlazorBus.Pages
     public RigConf Config { get; set; }
 
     public bool isNotNew { get; set; } = true;
-    private EditContext EC { get; set; }
+    public EditContext EC { get; set; }
     public BusType RigType { get; set; }
     // Methods
     public RigSettings()
@@ -42,7 +42,7 @@ namespace BlazorBus.Pages
     }
     protected override async Task OnParametersSetAsync()
     {
-      Console.WriteLine("in onsetpar");
+;
       var options = new JsonSerializerOptions()
       {
         WriteIndented = true
@@ -51,23 +51,19 @@ namespace BlazorBus.Pages
       if (busConf == null)
       {
         isNotNew = false;
-        Console.WriteLine("busConf not found");
         Config = new RigConf();
       }
       else {
         isNotNew = true;
         Config = JsonSerializer.Deserialize<RigConf>(busConf.Configuration);
-        Console.WriteLine($"busConf speed: {Config.baudRate} {Config.baudRate.GetType()}");
+
         Config.dataBits = 7;
         StateHasChanged();
-        Console.WriteLine($"busConf  found Name: {Config.name}");
       }
     }
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
-
-      Console.WriteLine("in on after rend");
 
       var options = new JsonSerializerOptions()
       {
@@ -80,7 +76,7 @@ namespace BlazorBus.Pages
     }
     public void HandleValidSubmit()
     {
-      EC.Validate();
+      Console.WriteLine("in valid handler");
     }
     public void CancelClick()
     {
@@ -88,7 +84,8 @@ namespace BlazorBus.Pages
     }
     public void SaveClick()
     {
-      EC.Validate();
+      var f = EC.Field("name");
+      var isvalid = EC.Validate();
       Console.WriteLine("Save");
     }
     public void HomeClick()
