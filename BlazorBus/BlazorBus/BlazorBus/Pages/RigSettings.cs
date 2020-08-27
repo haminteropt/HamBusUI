@@ -37,12 +37,13 @@ namespace BlazorBus.Pages
     }
     protected override void OnInitialized()
     {
-      EC = new EditContext(Config);
+      Console.WriteLine("on init");
+
       base.OnInitialized();
     }
     protected override async Task OnParametersSetAsync()
     {
-;
+      Console.WriteLine("top of onparamter");
       var options = new JsonSerializerOptions()
       {
         WriteIndented = true
@@ -60,11 +61,13 @@ namespace BlazorBus.Pages
         Config.dataBits = 7;
         StateHasChanged();
       }
+      if (EC == null)
+        EC = new EditContext(Config);
     }
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
-
+      Console.WriteLine( "on render");
       var options = new JsonSerializerOptions()
       {
         WriteIndented = true
@@ -86,7 +89,7 @@ namespace BlazorBus.Pages
     {
       var f = EC.Field("name");
       var isvalid = EC.Validate();
-      Console.WriteLine("Save");
+      Console.WriteLine($"Save: {isvalid}");
     }
     public void HomeClick()
     {

@@ -61,18 +61,19 @@
 </style>
 <div class="page-background">
     @*<EditForm Model="@Config" OnValidSubmit="Success">*@
-    <EditForm EditContext="@EC" OnSubmit="SaveClick">
+    <EditForm EditContext="EC" >
 
         <DataAnnotationsValidator />
         <div class="over-view">
             <div class="bus-type">
                 <MatH5>Type of Bus</MatH5>
-                <MatRadioGroup @bind-Value="@RigType" TValue="BusType">
+                <MatRadioGroup @bind-Value=RigType TValue="BusType">
                     @*<MatRadioButton Value="@string.Empty" TValue="string">Default</MatRadioButton>*@
                     <MatRadioButton Value="@BusType.RigBus" Label="Rig Bus" TValue="BusType"></MatRadioButton>
                     <MatRadioButton Value="@BusType.VirtualRigBus" Label="Virtual Rig Bus" TValue="BusType"></MatRadioButton>
                     <MatRadioButton Value="@BusType.LogBus" Label="Logging Bus" TValue="BusType"></MatRadioButton>
                 </MatRadioGroup>
+                <ValidationMessage For="@(() => Config.RigType)" />
             </div>
             <div><ValidationSummary/></div>
             <MatCard class="bus-form">
@@ -85,7 +86,7 @@
                     <MatBody2 class="">
                         <div class="comm-wrapper">
                             <div class="name">
-                                <MatTextField Label="Name" Disabled="@isNotNew" @bind-Value="@Config.name" />
+                                <MatTextField Label="Name" Disabled="@isNotNew" @bind-Value=Config.name />
                                 <ValidationMessage For="@(()=> Config.name)" />
                             </div>
                             <div class="port">
@@ -124,7 +125,7 @@
                                 <ValidationMessage For="@(() => Config.commPortName)" />
                             </div>
                             <div class="speed">
-                                <MatSelect Label="Speed" TValue="int" @bind-Value="@Config.baudRate">
+                                <MatSelect Label="Speed" TValue="int" @bind-Value=Config.baudRate>
                                     <MatOption TValue="int" Value="1200">   1200 bps</MatOption>
                                     <MatOption TValue="int" Value="2400">   2400 bps</MatOption>
                                     <MatOption TValue="int" Value="4800">   4800 bps</MatOption>
