@@ -59,10 +59,12 @@ namespace BlazorBus.Pages
         Config = JsonSerializer.Deserialize<RigConf>(busConf.Configuration);
 
         Config.dataBits = 7;
-        StateHasChanged();
+
       }
+      StateHasChanged();
       if (EC == null)
         EC = new EditContext(Config);
+      EC.Validate();
     }
 
     protected async override Task OnAfterRenderAsync(bool firstRender)

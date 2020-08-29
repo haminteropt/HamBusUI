@@ -68,7 +68,6 @@
             <div class="bus-type">
                 <MatH5>Type of Bus</MatH5>
                 <MatRadioGroup @bind-Value=RigType TValue="BusType">
-                    @*<MatRadioButton Value="@string.Empty" TValue="string">Default</MatRadioButton>*@
                     <MatRadioButton Value="@BusType.RigBus" Label="Rig Bus" TValue="BusType"></MatRadioButton>
                     <MatRadioButton Value="@BusType.VirtualRigBus" Label="Virtual Rig Bus" TValue="BusType"></MatRadioButton>
                     <MatRadioButton Value="@BusType.LogBus" Label="Logging Bus" TValue="BusType"></MatRadioButton>
@@ -179,7 +178,6 @@
                 </MatCardContent>
                 <MatCardActions>
                     <MatCardActionIcons>
-                        <MatButton Type="submit" Raised="true">Save</MatButton>
                         <MatIconButton Icon="@MatIconNames.Cancel" OnClick="@HomeClick"></MatIconButton>
                         <MatIconButton Icon="@MatIconNames.Save" OnClick="@SaveClick"></MatIconButton>
                         <MatIconButton Icon="@MatIconNames.Home" OnClick="@HomeClick"></MatIconButton>
