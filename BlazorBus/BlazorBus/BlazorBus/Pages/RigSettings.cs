@@ -22,6 +22,8 @@ namespace BlazorBus.Pages
     public IBusStatusService BusService { get; set; }
     [Inject]
     private NavigationManager navMgr { get; set; }
+    [Inject]
+    public IHamSignalRService SigR { get; set; }
     [Parameter]
     public string Name { get; set; }
 
@@ -30,6 +32,8 @@ namespace BlazorBus.Pages
     public bool isNotNew { get; set; } = true;
     public EditContext EC { get; set; }
     public BusType RigType { get; set; }
+
+    private BusConfigurationDB DbConfig { get; set; } = new BusConfigurationDB();
     // Methods
     public RigSettings()
     {
@@ -43,20 +47,17 @@ namespace BlazorBus.Pages
     }
     protected override async Task OnParametersSetAsync()
     {
-      Console.WriteLine("top of onparamter");
-      var options = new JsonSerializerOptions()
-      {
-        WriteIndented = true
-      };
-      var busConf = BusService.FindByName(Name);
-      if (busConf == null)
+
+
+      DbConfig = BusService.FindByName(Name);
+      if (DbConfig == null)
       {
         isNotNew = false;
         Config = new RigConf();
       }
       else {
         isNotNew = true;
-        Config = JsonSerializer.Deserialize<RigConf>(busConf.Configuration);
+        Config = JsonSerializer.Deserialize<RigConf>(DbConfig.Configuration);
 
         Config.dataBits = 7;
 
@@ -69,7 +70,6 @@ namespace BlazorBus.Pages
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
-      Console.WriteLine( "on render");
       var options = new JsonSerializerOptions()
       {
         WriteIndented = true
@@ -89,9 +89,21 @@ namespace BlazorBus.Pages
     }
     public void SaveClick()
     {
-      var f = EC.Field("name");
+
       var isvalid = EC.Validate();
-      Console.WriteLine($"Save: {isvalid}");
+      if (isvalid)
+      {
+        var options = new JsonSerializerOptions()
+        {
+          WriteIndented = true
+        };
+        if (DbConfig == null) DbConfig = new BusConfigurationDB();
+        DbConfig.Name = Config.name;
+        DbConfig.Version = 1;
+        DbConfig.BusType = Config.RigType;
+        DbConfig.Configuration = JsonSerializer.Serialize<RigConf>(Config);
+        SigR.SaveConfiguration(Config.name,DbConfig);
+      }
     }
     public void HomeClick()
     {

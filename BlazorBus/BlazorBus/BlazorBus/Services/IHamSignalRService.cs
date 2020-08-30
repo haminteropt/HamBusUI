@@ -18,5 +18,6 @@ namespace BlazorBus.Services
     Task<HubConnection> StartService(string url);
     Task Login(List<string> groupList, string name);
     Task SetLock(LockModel locker);
+    Task SaveConfiguration(string busName, BusConfigurationDB config);
   }
 }

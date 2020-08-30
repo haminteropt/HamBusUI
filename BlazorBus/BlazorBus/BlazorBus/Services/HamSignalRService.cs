@@ -106,6 +106,10 @@ namespace BlazorBus.Services
     {
       await connection.InvokeAsync(SignalRCommands.LockRig, locker);
     }
+    public async Task SaveConfiguration(string busName, BusConfigurationDB config)
+    {
+      await connection.InvokeAsync(SignalRCommands.SaveConfiguration, busName, config);
+    }
     #endregion
   }
 

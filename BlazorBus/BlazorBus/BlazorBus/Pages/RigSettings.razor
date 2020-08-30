@@ -67,7 +67,7 @@
         <div class="over-view">
             <div class="bus-type">
                 <MatH5>Type of Bus</MatH5>
-                <MatRadioGroup @bind-Value=RigType TValue="BusType">
+                <MatRadioGroup @bind-Value=Config.RigType TValue="BusType">
                     <MatRadioButton Value="@BusType.RigBus" Label="Rig Bus" TValue="BusType"></MatRadioButton>
                     <MatRadioButton Value="@BusType.VirtualRigBus" Label="Virtual Rig Bus" TValue="BusType"></MatRadioButton>
                     <MatRadioButton Value="@BusType.LogBus" Label="Logging Bus" TValue="BusType"></MatRadioButton>
@@ -147,8 +147,9 @@
 
                             <div class="stop-bits">
                                 <MatSelect Label="Stop Bit" @bind-Value="@Config.stopBits">
-                                    <MatOptionString Value="one">1 stop bits</MatOptionString>
-                                    <MatOptionString Value="two">2 stop bits</MatOptionString>
+                                    <MatOptionString Value=@StopBitTypes.StopBits1>1 stop bits</MatOptionString>
+                                    <MatOptionString Value=@StopBitTypes.StopBits15>1.5 stop bits</MatOptionString>
+                                    <MatOptionString Value=@StopBitTypes.StopBits2>2 stop bits</MatOptionString>
                                 </MatSelect>
                                 <ValidationMessage For="@(()=> Config.stopBits)" />
                             </div>
