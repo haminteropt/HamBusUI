@@ -59,7 +59,7 @@ namespace BlazorBus.Pages
         isNotNew = true;
         Config = JsonSerializer.Deserialize<RigConf>(DbConfig.Configuration);
 
-        Config.dataBits = 7;
+        Config.DataBits = 7;
 
       }
       StateHasChanged();
@@ -98,11 +98,11 @@ namespace BlazorBus.Pages
           WriteIndented = true
         };
         if (DbConfig == null) DbConfig = new BusConfigurationDB();
-        DbConfig.Name = Config.name;
+        DbConfig.Name = Config.Name;
         DbConfig.Version = 1;
         DbConfig.BusType = Config.RigType;
         DbConfig.Configuration = JsonSerializer.Serialize<RigConf>(Config);
-        SigR.SaveConfiguration(Config.name,DbConfig);
+        SigR.SaveConfiguration(Config.Name,DbConfig);
       }
     }
     public void HomeClick()

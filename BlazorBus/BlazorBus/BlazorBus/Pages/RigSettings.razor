@@ -3,6 +3,10 @@
 @using System.ComponentModel.DataAnnotations
 @using HamBusCommonStd
 <style>
+    .MatSelect {
+        width: 150px;
+        min-width: 200px;
+    }
     .radio-box {
         background-color: lightpink;
     }
@@ -85,11 +89,11 @@
                     <MatBody2 class="">
                         <div class="comm-wrapper">
                             <div class="name">
-                                <MatTextField Label="Name" Disabled="@isNotNew" @bind-Value=Config.name />
-                                <ValidationMessage For="@(()=> Config.name)" />
+                                <MatTextField Label="Name" Disabled="@isNotNew" @bind-Value=Config.Name />
+                                <ValidationMessage For="@(()=> Config.Name)" />
                             </div>
                             <div class="port">
-                                <MatSelect Label="Comm Port" @bind-Value="@Config.commPortName">
+                                <MatSelect Class="MatSelect" Label="CAT Control Comm Port" @bind-Value="@Config.CommPortName">
                                     <MatOptionString Value=""></MatOptionString>
                                     <MatOptionString Value="COM1">COM1</MatOptionString>
                                     <MatOptionString Value="COM2">COM2</MatOptionString>
@@ -121,10 +125,10 @@
                                     <MatOptionString Value="COM28">COM28</MatOptionString>
                                     <MatOptionString Value="COM29">COM29</MatOptionString>
                                 </MatSelect>
-                                <ValidationMessage For="@(() => Config.commPortName)" />
+                                <ValidationMessage For="@(() => Config.CommPortName)" />
                             </div>
                             <div class="speed">
-                                <MatSelect Label="Speed" TValue="int" @bind-Value=Config.baudRate>
+                                <MatSelect  Class="MatSelect"  Label="Speed" TValue="int" @bind-Value=Config.BaudRate>
                                     <MatOption TValue="int" Value="1200">   1200 bps</MatOption>
                                     <MatOption TValue="int" Value="2400">   2400 bps</MatOption>
                                     <MatOption TValue="int" Value="4800">   4800 bps</MatOption>
@@ -134,45 +138,45 @@
                                     <MatOption TValue="int" Value="38400">38,400 bps</MatOption>
                                     <MatOption TValue="int" Value="56000">56,000 bps</MatOption>
                                 </MatSelect>
-                                <ValidationMessage For="@(()=> Config.baudRate)" />
+                                <ValidationMessage For="@(()=> Config.BaudRate)" />
                             </div>
 
                             <div class="data-bits">
-                                <MatSelect Label="Data bits" @bind-Value="@Config.dataBits">
+                                <MatSelect Label="Data bits" @bind-Value="@Config.DataBits">
                                     <MatOption TValue="int" Value="7">7 bits</MatOption>
                                     <MatOption TValue="int" Value="8">8 bits</MatOption>
                                 </MatSelect>
-                                <ValidationMessage For="@(()=> Config.dataBits)" />
+                                <ValidationMessage For="@(()=> Config.DataBits)" />
                             </div>
 
                             <div class="stop-bits">
-                                <MatSelect Label="Stop Bit" @bind-Value="@Config.stopBits">
+                                <MatSelect Label="Stop Bit" @bind-Value="@Config.StopBits">
                                     <MatOptionString Value=@StopBitTypes.StopBits1>1 stop bits</MatOptionString>
                                     <MatOptionString Value=@StopBitTypes.StopBits15>1.5 stop bits</MatOptionString>
                                     <MatOptionString Value=@StopBitTypes.StopBits2>2 stop bits</MatOptionString>
                                 </MatSelect>
-                                <ValidationMessage For="@(()=> Config.stopBits)" />
+                                <ValidationMessage For="@(()=> Config.StopBits)" />
                             </div>
 
                             <div class="parity">
-                                <MatSelect Label="Parity" @bind-Value="@Config.parity">
+                                <MatSelect Label="Parity" @bind-Value="@Config.Parity">
                                     <MatOptionString TValue="string" Value=""></MatOptionString>
                                     <MatOptionString Value="odd">Odd</MatOptionString>
                                     <MatOptionString Value="even">Even</MatOptionString>
                                     <MatOptionString Value="none">None</MatOptionString>
                                 </MatSelect>
-                                <ValidationMessage For="@(()=> Config.parity)" />
+                                <ValidationMessage For="@(()=> Config.Parity)" />
                             </div>
 
                             <div class="handshake">
-                                <MatSelect Label="Hand Shake" @bind-Value="@Config.handshake">
+                                <MatSelect Label="Hand Shake" @bind-Value="@Config.Handshake">
                                     <MatOptionString TValue="string" Value=""></MatOptionString>
                                     <MatOptionString Value="none">None</MatOptionString>
                                     <MatOptionString Value="rts">RTS</MatOptionString>
                                     <MatOptionString Value="dtr">DTR</MatOptionString>
                                     <MatOptionString Value="both">Both</MatOptionString>
                                 </MatSelect>
-                                <ValidationMessage For="@(()=> Config.handshake)" />
+                                <ValidationMessage For="@(()=> Config.Handshake)" />
                             </div>
                         </div>
                     </MatBody2>
