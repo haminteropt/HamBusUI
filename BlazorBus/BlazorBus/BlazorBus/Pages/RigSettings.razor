@@ -60,7 +60,9 @@
     .comm-wrapper {
         display: grid;
         grid-gap: 10px;
-        grid-template-areas: "name        name    ." "port        speed   data-bits" "stop-bits   parity  handshake"
+        grid-template-areas: "name        name    ." 
+                             "port        speed   data-bits" 
+                             "stop-bits   parity  handshake"
     }
 </style>
 <div class="page-background">
@@ -74,7 +76,6 @@
                 <MatRadioGroup @bind-Value=Config.RigType TValue="BusType">
                     <MatRadioButton Value="@BusType.RigBus" Label="Rig Bus" TValue="BusType"></MatRadioButton>
                     <MatRadioButton Value="@BusType.VirtualRigBus" Label="Virtual Rig Bus" TValue="BusType"></MatRadioButton>
-                    <MatRadioButton Value="@BusType.LogBus" Label="Logging Bus" TValue="BusType"></MatRadioButton>
                 </MatRadioGroup>
                 <ValidationMessage For="@(() => Config.RigType)" />
             </div>
@@ -174,7 +175,8 @@
                                     <MatOptionString Value="none">None</MatOptionString>
                                     <MatOptionString Value="rts">RTS</MatOptionString>
                                     <MatOptionString Value="dtr">DTR</MatOptionString>
-                                    <MatOptionString Value="both">Both</MatOptionString>
+                                    <MatOptionString Value="xonxoff">XON/XOFF</MatOptionString>
+                                    @*<MatOptionString Value="both">Both RTS/DTR</MatOptionString>*@
                                 </MatSelect>
                                 <ValidationMessage For="@(()=> Config.Handshake)" />
                             </div>
