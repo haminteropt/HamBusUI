@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BlazorBus.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 namespace BlazorBus
 {
@@ -19,6 +20,8 @@ namespace BlazorBus
 
       builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }
       );
+
+      Log.Logger = new LoggerConfiguration().MinimumLevel.Debug().WriteTo.BrowserConsole().CreateLogger();
       builder.RootComponents.Add<App>("app");
       await builder.Build().RunAsync();
     }
