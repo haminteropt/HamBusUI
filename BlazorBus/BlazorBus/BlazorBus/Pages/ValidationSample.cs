@@ -11,7 +11,7 @@ namespace BlazorBus.Pages
 {
   public partial class ValidationSample
   {
-    public EditContext EC { get; set; }
+    public EditContext? EC { get; set; }
     class SexDef
     {
       public string Name { get; set; }
@@ -30,11 +30,11 @@ namespace BlazorBus.Pages
     };
 
     [Inject]
-    IJSRuntime JS { get; set; }
+    IJSRuntime? JS { get; set; }
 
     async Task Success()
     {
-      var v = EC.Validate();
+      var v = EC!.Validate();
       Console.WriteLine($"v = {v}");
 
     }
@@ -49,13 +49,13 @@ namespace BlazorBus.Pages
     public class LoginModel
     {
       [Required]
-      public string Username { get; set; }
+      public string? Username { get; set; }
 
       [Required]
       [MinLength(2)]
-      public string Password { get; set; }
+      public string? Password { get; set; } = null;
 
-      public string Comment { get; set; }
+      public string? Comment { get; set; }
 
     }
   }

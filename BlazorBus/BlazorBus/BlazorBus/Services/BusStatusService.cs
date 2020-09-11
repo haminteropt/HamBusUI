@@ -7,7 +7,7 @@ namespace BlazorBus.Services
   public class BusStatusService: IBusStatusService
   {
     public List<BusStatusModel> BusStatusList { get; set; } = new List<BusStatusModel>();
-    public List<BusConfigurationDB> BusDbConfig { get; set; } = new List<BusConfigurationDB>();
+    public List<BusConfigurationDB>? BusDbConfig { get; set; } = new List<BusConfigurationDB>();
     public void UpdateState(RigState state)
     {
       int index = BusStatusList.FindIndex(item => item.Name == state.Name);
@@ -39,7 +39,7 @@ namespace BlazorBus.Services
     }
     public void UpdateBusConfig(BusConfigurationDB bus)
     {
-      int index = BusDbConfig.FindIndex(item => item.Name.Equals(bus.Name));
+      int index = BusDbConfig!.FindIndex(item => item.Name.Equals(bus.Name));
       if (index != -1)
         BusDbConfig[index] = bus;
       else
@@ -47,9 +47,9 @@ namespace BlazorBus.Services
         BusDbConfig.Add(bus);
       }
     }
-    public BusConfigurationDB FindByName(string name)
+    public BusConfigurationDB? FindByName(string name)
     {
-      int index = BusDbConfig.FindIndex(item => item.Name.Equals(name));
+      int index = BusDbConfig!.FindIndex(item => item.Name.Equals(name));
       if (index < 0) return null;
       return BusDbConfig[index];
     }

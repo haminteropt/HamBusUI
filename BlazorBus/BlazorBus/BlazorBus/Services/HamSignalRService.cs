@@ -13,7 +13,7 @@ namespace BlazorBus.Services
   public class HamSignalRService : IHamSignalRService
   {
     [Inject]
-    private ActiveBusesService ActiveBuses { get; set; }
+    private ActiveBusesService? ActiveBuses { get; set; }
 
     //[Inject]
     private IBusStatusService BusService { get; set; }
@@ -21,7 +21,7 @@ namespace BlazorBus.Services
     public Subject<ActiveBusesModel> ActiveUpdate__ { get; set; } = new Subject<ActiveBusesModel>();
     public Subject<UiInfoPacketModel> InfoPacket__ { get; set; } = new Subject<UiInfoPacketModel>();
     public Subject<RigState> RigState__ { get; set; } = new Subject<RigState>();
-    public BehaviorSubject<HamBusError> HBErrors__ { get; set; } = new BehaviorSubject<HamBusError>(null);
+    public BehaviorSubject<HamBusError?> HBErrors__ { get; set; } = new BehaviorSubject<HamBusError?>(null);
     public Subject<HamBusError> SaveResults__ { get; set; } = new Subject<HamBusError>();
     #endregion
 
@@ -31,7 +31,7 @@ namespace BlazorBus.Services
       WriteIndented = true
     };
 
-    private HubConnection connection;
+    private HubConnection? connection;
     public HamSignalRService(IBusStatusService bs)
     {
       BusService = bs;

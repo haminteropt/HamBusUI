@@ -10,14 +10,14 @@ namespace BlazorBus.Shared
   public partial class MainLayout
   {
     [Inject]
-    public IHamSignalRService SigR { get; set; }
+    public IHamSignalRService? SigR { get; set; }
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
       try
       {
         if (firstRender)
         {
-          var conn = await SigR.StartService("http://localhost:7300/masterbus");
+          var conn = await SigR!.StartService("http://localhost:7300/masterbus");
           List<string> groupList = new List<string>();
           groupList.Add("logging");
           groupList.Add("ui");

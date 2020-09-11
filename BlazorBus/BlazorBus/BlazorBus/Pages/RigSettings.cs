@@ -15,25 +15,25 @@ namespace BlazorBus.Pages
   public partial class RigSettings
   {
     [Inject]
-    IJSRuntime JS { get; set; }
+    IJSRuntime? JS { get; set; }
     [Inject]
-    public IActiveBusesService ActiveBusServie { get; set; }
+    public IActiveBusesService? ActiveBusServie { get; set; }
     [Inject]
-    public IBusStatusService BusService { get; set; }
+    public IBusStatusService? BusService { get; set; }
     [Inject]
-    private NavigationManager navMgr { get; set; }
+    private NavigationManager? NavMgr { get; set; }
     [Inject]
-    public IHamSignalRService SigR { get; set; }
+    public IHamSignalRService? SigR { get; set; }
     [Parameter]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     public RigConf Config { get; set; }
 
     public bool isNotNew { get; set; } = true;
-    public EditContext EC { get; set; }
+    public EditContext? EC { get; set; }
     public BusType RigType { get; set; }
 
-    private BusConfigurationDB DbConfig { get; set; } = new BusConfigurationDB();
+    private BusConfigurationDB? DbConfig { get; set; } = new BusConfigurationDB();
     // Methods
     public RigSettings()
     {
@@ -49,7 +49,8 @@ namespace BlazorBus.Pages
     {
 
 
-      DbConfig = BusService.FindByName(Name);
+      if (Name == null) return;
+      DbConfig = BusService!.FindByName(Name);
       if (DbConfig == null)
       {
         isNotNew = false;
@@ -90,7 +91,7 @@ namespace BlazorBus.Pages
     public void SaveClick()
     {
 
-      var isvalid = EC.Validate();
+      var isvalid = EC!.Validate();
       if (isvalid)
       {
         var options = new JsonSerializerOptions()
@@ -102,12 +103,12 @@ namespace BlazorBus.Pages
         DbConfig.Version = 1;
         DbConfig.BusType = Config.RigType;
         DbConfig.Configuration = JsonSerializer.Serialize<RigConf>(Config);
-        SigR.SaveConfiguration(Config.Name,DbConfig);
+        SigR!.SaveConfiguration(Config.Name,DbConfig);
       }
     }
     public void HomeClick()
     {
-      navMgr.NavigateTo($"/");
+      NavMgr!.NavigateTo($"/");
     }
   }
 }

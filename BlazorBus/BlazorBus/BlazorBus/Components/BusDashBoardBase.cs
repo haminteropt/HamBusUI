@@ -12,14 +12,14 @@ namespace BlazorBus.Components
 {
   public class BusDashBoardBase : ComponentBase
   {
-    public string FirstRadio { get; set; }
+    public string? FirstRadio { get; set; } = null;
 
     [Inject]
-    public IActiveBusesService ActiveBusServie { get; set; }
+    public IActiveBusesService? ActiveBusServie { get; set; } = null;
     [Inject]
-    public IBusStatusService BusService { get; set; }
+    public IBusStatusService? BusService { get; set; }
     [Inject]
-    public IHamSignalRService SigR { get; set; }
+    public IHamSignalRService? SigR { get; set; }
 
     [Parameter]
 
@@ -30,9 +30,9 @@ namespace BlazorBus.Components
     private long freqLong;
     private long SerialNum { get; set; } = 0;
 
-    protected string StyleToRender;
+    protected string? StyleToRender;
     [Inject]
-    private NavigationManager navMgr { get; set; }
+    private NavigationManager? navMgr { get; set; }
 
     public BusDashBoardBase()
     {
@@ -60,9 +60,9 @@ namespace BlazorBus.Components
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
 
-      SigR.InfoPacket__.Subscribe<UiInfoPacketModel>((info) =>
+      SigR!.InfoPacket__.Subscribe<UiInfoPacketModel>((info) =>
       {
-        ActiveBusServie.ActiveBuses = info.ActiveBuses;
+        ActiveBusServie!.ActiveBuses = info.ActiveBuses;
         foreach (var active in info.ActiveBuses)
         {
           UpdateNewState(active.State);
@@ -89,7 +89,7 @@ namespace BlazorBus.Components
     private void HandleActiveBusUpdate(ActiveBusesModel active)
     {
       UpdateNewState(active.State);
-      ActiveBusServie.BusUpdate(active);
+      ActiveBusServie!.BusUpdate(active);
       StateHasChanged();
     }
     JsonSerializerOptions options = new JsonSerializerOptions
@@ -104,12 +104,12 @@ namespace BlazorBus.Components
       var lockDTO = new LockModel();
       lockDTO.Name = bus.Name;
       lockDTO.IsStateLocked = e;
-      SigR.SetLock(lockDTO);
+      SigR!.SetLock(lockDTO);
 
     }
     public void SettingsClick(BusStatusModel bus)
     {
-      navMgr.NavigateTo($"/RigSettings/{bus.Name}");
+      navMgr!.NavigateTo($"/RigSettings/{bus.Name}");
     }
 
     private void UpdateNewState(RigState state)
