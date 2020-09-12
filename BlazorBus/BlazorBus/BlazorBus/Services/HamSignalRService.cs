@@ -18,11 +18,13 @@ namespace BlazorBus.Services
     //[Inject]
     private IBusStatusService BusService { get; set; }
     #region Observables 
-    public Subject<ActiveBusesModel> ActiveUpdate__ { get; set; } = new Subject<ActiveBusesModel>();
-    public Subject<UiInfoPacketModel> InfoPacket__ { get; set; } = new Subject<UiInfoPacketModel>();
-    public Subject<RigState> RigState__ { get; set; } = new Subject<RigState>();
-    public BehaviorSubject<HamBusError?> HBErrors__ { get; set; } = new BehaviorSubject<HamBusError?>(null);
-    public Subject<HamBusError> SaveResults__ { get; set; } = new Subject<HamBusError>();
+    public Subject<UiInfoPacketModel>? InfoPacket__ { get; set; } = new Subject<UiInfoPacketModel>();
+    public Subject<RigState>? RigState__ { get; set; } = new Subject<RigState>();
+    public BehaviorSubject<HamBusError>? HBErrors__ { get; set; } = new BehaviorSubject<HamBusError>(new HamBusError());
+
+    public Subject<ActiveBusesModel>? ActiveUpdate__ { get; set; } = new Subject<ActiveBusesModel>();
+    
+    public Subject<HamBusError>? SaveResults__ { get; set; } = new Subject<HamBusError>();
     #endregion
 
     JsonSerializerOptions options = new JsonSerializerOptions
@@ -72,20 +74,20 @@ namespace BlazorBus.Services
 
     private void BuildResponseActions()
     {
-      connection.On<HamBusError>(SignalRCommands.ErrorReport, (errorReport) => HBErrors__.OnNext(errorReport));
+      connection.On<HamBusError>(SignalRCommands.ErrorReport, (errorReport) => HBErrors__!.OnNext(errorReport));
       connection.On<UiInfoPacketModel>(SignalRCommands.InfoPacket, (info) =>
       {
         Console.WriteLine("In on infoPacket");
         BusService.UpdateFromInfoPacket(info);
 
-        InfoPacket__.OnNext(info);
+        InfoPacket__!.OnNext(info);
       });
       connection.On<RigState>(SignalRCommands.State, (state) =>
       {
         Console.WriteLine("In on state");
 
         BusService.UpdateState(state);
-        RigState__.OnNext(state);
+        RigState__!.OnNext(state);
       });
 
       connection.On<ActiveBusesModel>(SignalRCommands.ActiveUpdate, (update) =>
@@ -93,7 +95,7 @@ namespace BlazorBus.Services
         Console.WriteLine("In on active update");
 
         BusService.UpdateActiveBuses(update);
-        ActiveUpdate__.OnNext(update);
+        ActiveUpdate__!.OnNext(update);
       });
     }
 
