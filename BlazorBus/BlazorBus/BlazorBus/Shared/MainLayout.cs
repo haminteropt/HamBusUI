@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace BlazorBus.Shared
 {
-  public partial class MainLayout
+  public partial class MainLayout : ComponentBase
   {
     [Inject]
     public IHamSignalRService? SigR { get; set; }
-    protected async override Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
       try
       {
