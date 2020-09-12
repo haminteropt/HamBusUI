@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace BlazorBus.Shared
 {
-  public partial class MainLayout : ComponentBase
+  public partial class MainLayout : LayoutComponentBase
   {
     [Inject]
     public IHamSignalRService? SigR { get; set; }
