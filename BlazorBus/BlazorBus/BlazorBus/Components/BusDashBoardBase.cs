@@ -7,6 +7,7 @@ using BlazorComponentUtilities;
 using HamBusCommonStd;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Serilog;
 
 namespace BlazorBus.Components
 {
@@ -36,6 +37,7 @@ namespace BlazorBus.Components
 
     public BusDashBoardBase()
     {
+      Log.Information("in BusDashBoardBase con");
 
     }
     public string GetClass(bool isActive)

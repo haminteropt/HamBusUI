@@ -21,7 +21,7 @@ namespace BlazorBus
       builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }
       );
 
-      Log.Logger = new LoggerConfiguration().MinimumLevel.Debug().WriteTo.BrowserConsole().CreateLogger();
+      Log.Logger = new LoggerConfiguration().MinimumLevel.Verbose().WriteTo.BrowserConsole().CreateLogger();
       builder.RootComponents.Add<App>("app");
       await builder.Build().RunAsync();
     }

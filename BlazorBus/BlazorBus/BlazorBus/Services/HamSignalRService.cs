@@ -7,6 +7,7 @@ using BlazorBus.SharedModels;
 using HamBusCommonStd;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
+using Serilog;
 
 namespace BlazorBus.Services
 {
@@ -74,17 +75,19 @@ namespace BlazorBus.Services
 
     private void BuildResponseActions()
     {
+
       connection.On<HamBusError>(SignalRCommands.ErrorReport, (errorReport) => HBErrors__!.OnNext(errorReport));
       connection.On<UiInfoPacketModel>(SignalRCommands.InfoPacket, (info) =>
       {
-        Console.WriteLine("In on infoPacket");
-        BusService.UpdateFromInfoPacket(info);
+        Log.Verbose("In on infoPacket");
 
+        BusService.UpdateFromInfoPacket(info);
+        Log.Debug("{@info} of log of info", info);
         InfoPacket__!.OnNext(info);
       });
       connection.On<RigState>(SignalRCommands.State, (state) =>
       {
-        Console.WriteLine("In on state");
+        Log.Debug("In on state");
 
         BusService.UpdateState(state);
         RigState__!.OnNext(state);
@@ -92,7 +95,7 @@ namespace BlazorBus.Services
 
       connection.On<ActiveBusesModel>(SignalRCommands.ActiveUpdate, (update) =>
       {
-        Console.WriteLine("In on active update");
+       Log.Debug("In on active update");
 
         BusService.UpdateActiveBuses(update);
         ActiveUpdate__!.OnNext(update);
