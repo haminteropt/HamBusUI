@@ -70,7 +70,7 @@ namespace BlazorBus.Components
           UpdateNewState(active.State);
         }
         StateHasChanged();
-        Console.WriteLine("in info sub");
+        Log.Debug("in info subj {@info}",info);
       });
 
       SigR.ActiveUpdate__.Subscribe(active =>
@@ -82,7 +82,7 @@ namespace BlazorBus.Components
       SigR.RigState__.Subscribe((state) =>
       {
         UpdateNewState(state);
-        Console.WriteLine("in state sub");
+        Log.Warning("in state sub");
 
       });
 
