@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BlazorBus.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
+using Serilog;
 
 namespace BlazorBus.Shared
 {
@@ -28,7 +29,7 @@ namespace BlazorBus.Shared
       }
       catch (Exception e)
       {
-        Console.WriteLine(e.Message);
+        Log.Error("Error in starting SignalR {@e}");
       }
     }
   }
