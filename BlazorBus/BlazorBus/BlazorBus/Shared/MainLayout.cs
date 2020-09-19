@@ -29,7 +29,7 @@ namespace BlazorBus.Shared
       }
       catch (Exception e)
       {
-        Log.Error("Error in starting SignalR {@e}");
+        Log.Error("Error in starting SignalR {@e}",e);
       }
     }
   }

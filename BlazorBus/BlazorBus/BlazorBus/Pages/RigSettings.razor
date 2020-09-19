@@ -67,10 +67,10 @@
     }
 </style>
 <div class="page-background">
-    @*<EditForm Model="@Config" OnValidSubmit="Success">*@
-    <EditForm EditContext="EC" >
+    <EditForm Model="@Config" OnValidSubmit="SaveClick">
+    @*<EditForm EditContext="@EC" >*@
 
-        <FluentValidationValidator />
+        <FluentValidation TValidator="RigSettingValidator" />
         <div class="over-view">
             <div class="bus-type">
                 <MatH5>Type of Bus</MatH5>
@@ -186,6 +186,7 @@
                 </MatCardContent>
                 <MatCardActions>
                     <MatCardActionIcons>
+                        <MatIconButton Icon="@MatIconNames.Add" OnClick="@NewClick"></MatIconButton>
                         <MatIconButton Icon="@MatIconNames.Cancel" OnClick="@HomeClick"></MatIconButton>
                         <MatIconButton Icon="@MatIconNames.Save" OnClick="@SaveClick"></MatIconButton>
                         <MatIconButton Icon="@MatIconNames.Home" OnClick="@HomeClick"></MatIconButton>

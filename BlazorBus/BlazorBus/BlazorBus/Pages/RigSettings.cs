@@ -31,7 +31,7 @@ namespace BlazorBus.Pages
     public RigConf Config { get; set; }
 
     public bool isNotNew { get; set; } = true;
-    public EditContext? EC { get; set; }
+    //public EditContext? EC { get; set; }
     public BusType RigType { get; set; }
 
     private BusConfigurationDB? DbConfig { get; set; } = new BusConfigurationDB();
@@ -42,7 +42,7 @@ namespace BlazorBus.Pages
     }
     protected override void OnInitialized()
     {
-      Log.Verbose("on init");
+      Log.Verbose("Rigsettings: OnInitialized:on init");
 
       base.OnInitialized();
     }
@@ -65,9 +65,9 @@ namespace BlazorBus.Pages
 
       }
       StateHasChanged();
-      if (EC == null)
-        EC = new EditContext(Config);
-      EC.Validate();
+      //if (EC == null)
+      //  EC = new EditContext(Config);
+      //EC.Validate();
     }
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
@@ -87,29 +87,33 @@ namespace BlazorBus.Pages
     }
     public void CancelClick()
     {
-      Log.Verbose("Cancel");
+      Log.Verbose("RigSetting: cancelClick: Cancel");
     }
     public void SaveClick()
     {
-
-      var isvalid = EC!.Validate();
-      if (isvalid)
-      {
-        var options = new JsonSerializerOptions()
-        {
-          WriteIndented = true
-        };
-        if (DbConfig == null) DbConfig = new BusConfigurationDB();
-        DbConfig.Name = Config.Name;
-        DbConfig.Version = 1;
-        DbConfig.BusType = Config.RigType;
-        DbConfig.Configuration = JsonSerializer.Serialize<RigConf>(Config);
-        SigR!.SaveConfiguration(Config.Name,DbConfig);
-      }
+      Log.Debug("RigSetting: Save Click");
+      //var isvalid = EC!.Validate();
+      //if (isvalid)
+      //{
+      //  var options = new JsonSerializerOptions()
+      //  {
+      //    WriteIndented = true
+      //  };
+      //  if (DbConfig == null) DbConfig = new BusConfigurationDB();
+      //  DbConfig.Name = Config.Name;
+      //  DbConfig.Version = 1;
+      //  DbConfig.BusType = Config.RigType;
+      //  DbConfig.Configuration = JsonSerializer.Serialize<RigConf>(Config);
+      //  SigR!.SaveConfiguration(Config.Name,DbConfig);
+      //}
     }
     public void HomeClick()
     {
       NavMgr!.NavigateTo($"/");
+    }
+    public void NewClick()
+    {
+      isNotNew = false;
     }
   }
 }
