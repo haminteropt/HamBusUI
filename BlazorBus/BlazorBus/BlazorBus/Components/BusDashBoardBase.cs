@@ -76,7 +76,7 @@ namespace BlazorBus.Components
       SigR.ActiveUpdate__.Subscribe(active =>
       {
         HandleActiveBusUpdate(active);
-        Console.WriteLine("in active sub");
+        Log.Verbose("in active sub {@active}", active);
       });
 
       SigR.RigState__.Subscribe((state) =>
@@ -102,7 +102,7 @@ namespace BlazorBus.Components
 
     public void LockClick(bool e, BusStatusModel bus)
     {
-      Console.WriteLine($"name: {bus.Name} toggle: {e}");
+      Log.Verbose("name: {@bus.Name} toggle: {@e}", bus.Name, e);
       var lockDTO = new LockModel();
       lockDTO.Name = bus.Name;
       lockDTO.IsStateLocked = e;

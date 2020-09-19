@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
+using Serilog;
 
 namespace BlazorBus.Pages
 {
@@ -35,7 +36,7 @@ namespace BlazorBus.Pages
     async Task Success()
     {
       var v = EC!.Validate();
-      Console.WriteLine($"v = {v}");
+      Log.Verbose($"v = {@v}",v);
 
     }
 

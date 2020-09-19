@@ -8,6 +8,7 @@ using MatBlazor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
+using Serilog;
 
 namespace BlazorBus.Pages
 {
@@ -41,7 +42,7 @@ namespace BlazorBus.Pages
     }
     protected override void OnInitialized()
     {
-      Console.WriteLine("on init");
+      Log.Verbose("on init");
 
       base.OnInitialized();
     }
@@ -82,11 +83,11 @@ namespace BlazorBus.Pages
     }
     public void HandleValidSubmit()
     {
-      Console.WriteLine("in valid handler");
+      Log.Verbose("in valid handler");
     }
     public void CancelClick()
     {
-      Console.WriteLine("Cancel");
+      Log.Verbose("Cancel");
     }
     public void SaveClick()
     {
