@@ -2,6 +2,7 @@
 @page "/RigSettings/{name}"
 @using System.ComponentModel.DataAnnotations
 @using HamBusCommonStd
+@using BlazorBus.Validators
 @using Blazored.FluentValidation
 <style>
     .MatSelect {
@@ -70,7 +71,7 @@
     <EditForm Model="@Config" OnValidSubmit="SaveClick">
     @*<EditForm EditContext="@EC" >*@
 
-        <FluentValidation TValidator="RigSettingValidator" />
+        <FluentValidationValidator  TValidator="RigSettingValidator" />
         <div class="over-view">
             <div class="bus-type">
                 <MatH5>Type of Bus</MatH5>
@@ -188,7 +189,8 @@
                     <MatCardActionIcons>
                         <MatIconButton Icon="@MatIconNames.Add" OnClick="@NewClick"></MatIconButton>
                         <MatIconButton Icon="@MatIconNames.Cancel" OnClick="@HomeClick"></MatIconButton>
-                        <MatIconButton Icon="@MatIconNames.Save" OnClick="@SaveClick"></MatIconButton>
+                        @*<MatIconButton Icon="@MatIconNames.Save" OnClick="@SaveClick"></MatIconButton>*@
+                        <button type="submit">Submit</button>
                         <MatIconButton Icon="@MatIconNames.Home" OnClick="@HomeClick"></MatIconButton>
                     </MatCardActionIcons>
                 </MatCardActions>
